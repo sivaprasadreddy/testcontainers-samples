@@ -1,0 +1,40 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  build-java-modules:
+    name: Test Java Modules
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        distribution: [ 'temurin' ]
+        java: [ '17' ]
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Java ${{ matrix.java }} (${{ matrix.distribution }})
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ matrix.java }}
+          distribution: ${{ matrix.distribution }}
+          cache: 'maven'
+
+      - name: Test with Maven/Gradle
+        run: ./run-tests.sh java
+
+  build-golang-modules:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.18
+
+      - name: Test
+        run: ./run-tests.sh golang
