@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: com.sivalabs.myapp
+testFramework: junit
+sourceLanguage: java
+buildTool: maven
+features: [annotation-api, app-name, assertj, data, data-jpa, flyway, github-workflow-ci, github-workflow-docker-registry, hibernate-jpa, hibernate-validator, http-client, jackson-databind, java, java-application, jdbc-hikari, jib, junit, logback, lombok, maven, mockito, netty-server, openapi, postgres, problem-json, properties, readme, shade, swagger-ui, test-resources, testcontainers]
