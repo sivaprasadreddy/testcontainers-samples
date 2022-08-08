@@ -27,6 +27,7 @@ jobs:
         run: ./run-tests.sh java
 
   build-golang-modules:
+    name: Test GoLang Modules
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
