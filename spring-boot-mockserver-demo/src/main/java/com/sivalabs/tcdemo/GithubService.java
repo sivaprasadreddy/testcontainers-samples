@@ -1,4 +1,4 @@
-package com.sivalabs.tcdemo.domain;
+package com.sivalabs.tcdemo;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,10 +14,10 @@ public class GithubService {
         this.githubApiBaseUrl = githubApiBaseUrl;
     }
 
-    public String getGithubUserProfile(String username) {
+    public GitHubUser getGithubUserProfile(String username) {
         log.info("Github API BaseUrl:" + githubApiBaseUrl);
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject(githubApiBaseUrl + "/users/" + username, String.class);
+        return restTemplate.getForObject(githubApiBaseUrl + "/users/" + username, GitHubUser.class);
     }
 }
 

@@ -1,4 +1,4 @@
-package com.sivalabs.tcdemo.infra;
+package com.sivalabs.tcdemo;
 
 import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ApplicationContextInitializer;
