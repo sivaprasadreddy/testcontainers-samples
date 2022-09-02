@@ -1,13 +1,13 @@
-package com.sivalabs.tcdemo;
+package com.sivalabs.promotionservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringBootTestcontainersApplication {
+public class PromotionServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringBootTestcontainersApplication.class, args);
+        SpringApplication.run(PromotionServiceApplication.class, args);
     }
 
 }

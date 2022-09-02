@@ -1,0 +1,23 @@
+{
+  "mappings": [
+    {
+      "request": {
+        "method": "GET",
+        "url": "/api/promotions"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "jsonBody": [
+          {
+            "id": 1,
+            "productId": 1,
+            "discount": 3000
+          }
+        ]
+      }
+    }
+  ]
+}

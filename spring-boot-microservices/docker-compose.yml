@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  toxiproxy:
+    image: shopify/toxiproxy
+    #network_mode: host
+    #extra_hosts:
+    #  - "host.docker.internal:host-gateway"
+    ports:
+      - "8474:8474"
