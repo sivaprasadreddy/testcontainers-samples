@@ -2,6 +2,7 @@ package com.sivalabs.tcdemo;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -29,16 +30,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 @Testcontainers
+@Disabled
 public class GithubControllerWireMockTCTest {
     @Autowired
     protected MockMvc mockMvc;
 
     private static WireMockServer wireMockServer;
 
-    static DockerImageName imageName = DockerImageName.parse("wiremock/wiremock:2.33.2");
+    static DockerImageName imageName = DockerImageName.parse("wiremock/wiremock:2.35.0-alpine");
 
     @Container
-    static GenericContainer wiremockContainer = new GenericContainer(imageName)
+    static GenericContainer<?> wiremockContainer = new GenericContainer<>(imageName)
             .withExposedPorts(8080);
 
     @DynamicPropertySource

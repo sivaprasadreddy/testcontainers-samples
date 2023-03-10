@@ -27,7 +27,7 @@ public class WireMockContainerInitializer implements ApplicationContextInitializ
 */
 
 
-        var imageName = DockerImageName.parse("wiremock/wiremock:2.33.2");
+        var imageName = DockerImageName.parse("wiremock/wiremock:2.35.0-alpine");
         var wiremockContainer = new GenericContainer(imageName)
                 .withExposedPorts(8080)
                 .withClasspathResourceMapping("/wiremock", "/home/wiremock", BindMode.READ_ONLY)
