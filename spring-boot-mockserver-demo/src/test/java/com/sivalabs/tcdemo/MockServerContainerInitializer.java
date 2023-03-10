@@ -8,7 +8,7 @@ import org.testcontainers.utility.DockerImageName;
 
 public class MockServerContainerInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
     public static MockServerContainer mockServerContainer =
-            new MockServerContainer(DockerImageName.parse("jamesdbloom/mockserver:mockserver-5.13.2"));
+            new MockServerContainer(DockerImageName.parse("mockserver/mockserver:5.13.2"));
 
     static {
         mockServerContainer.start();

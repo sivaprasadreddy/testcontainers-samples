@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.sivalabs</groupId>
+    <artifactId>testcontainers-java-samples</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>testcontainers-java-samples</name>
+    <description>testcontainers-java-samples</description>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>17</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+    </properties>
+
+    <modules>
+        <module>tc-basics</module>
+        <module>tc-testng</module>
+        <module>tc-dockerfile</module>
+        <module>tc-docker-compose</module>
+        <module>spring-boot-jpa-demo</module>
+        <module>spring-boot-mongodb-demo</module>
+        <module>spring-boot-mockserver-demo</module>
+        <module>spring-boot-wiremock-demo</module>
+        <module>spring-boot-localstack-demo</module>
+        <module>spring-boot-microservices</module>
+        <module>quarkus-jpa-demo</module>
+        <module>micronaut-jpa-demo</module>
+    </modules>
+
+</project>

@@ -1,0 +1,16 @@
+version: '3'
+services:
+  postgres-db:
+    image: postgres:15.2-alpine
+    environment:
+      - POSTGRES_USER=siva
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=appdb
+    ports:
+      - "5433:5432"
+
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"
+      - "15672:15672"

@@ -1,2 +1,1 @@
-# testcontainers-samples
-Sample projects using Testcontainers
+# Testcontainers Samples

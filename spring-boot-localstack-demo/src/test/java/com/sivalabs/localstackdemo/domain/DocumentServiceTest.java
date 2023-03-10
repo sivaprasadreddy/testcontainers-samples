@@ -1,19 +1,12 @@
 package com.sivalabs.localstackdemo.domain;
 
-import com.amazonaws.auth.AWSCredentialsProvider;
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.client.builder.AwsClientBuilder;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.sivalabs.localstackdemo.ApplicationProperties;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Primary;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.localstack.LocalStackContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -30,50 +23,34 @@ import static org.testcontainers.containers.localstack.LocalStackContainer.Servi
 @SpringBootTest
 @Testcontainers
 class DocumentServiceTest {
+
     @Container
     static LocalStackContainer localStack = new LocalStackContainer(
-            DockerImageName.parse("localstack/localstack:1.0.4"))
-            .withServices(S3)
-            .withExposedPorts(4566);
+            DockerImageName.parse("localstack/localstack:1.4"))
+            .withServices(S3);
 
-    @TestConfiguration
-    static class TestConfig {
-        @Bean
-        @Primary
-        public AmazonS3 amazonS3LocalStack()  {
-            return AmazonS3ClientBuilder.standard()
-                    .enablePathStyleAccess()
-                    .withEndpointConfiguration(endpointConfiguration(S3))
-                    .withCredentials(credentialsProvider())
-                    .build();
-        }
-
-        private AwsClientBuilder.EndpointConfiguration endpointConfiguration(LocalStackContainer.Service service) {
-            return new AwsClientBuilder.EndpointConfiguration(
-                    localStack.getEndpointOverride(service).toString(),
-                    localStack.getRegion()
-            );
-        }
-
-        private AWSCredentialsProvider credentialsProvider() {
-            return new AWSStaticCredentialsProvider(
-                    new BasicAWSCredentials(localStack.getAccessKey(),
-                            localStack.getSecretKey()));
-        }
+    @DynamicPropertySource
+    static void overrideProperties(DynamicPropertyRegistry registry) {
+        String awsEndpoint = "http://" + localStack.getHost() + ":" + localStack.getFirstMappedPort();
+        registry.add("spring.cloud.aws.endpoint", () -> awsEndpoint);
+        registry.add("spring.cloud.aws.region.static", () -> localStack.getRegion());
+        registry.add("spring.cloud.aws.credentials.access-key", () -> localStack.getAccessKey());
+        registry.add("spring.cloud.aws.credentials.secret-key", () -> localStack.getSecretKey());
+        registry.add("spring.cloud.aws.s3.path-style-access-enabled", () -> true);
     }
 
     @Autowired
-    private AmazonS3 amazonS3;
+    private DocumentService documentService;
 
     @Autowired
-    private DocumentService documentService;
+    private AmazonS3Service amazonS3Service;
 
     @Autowired
     private ApplicationProperties properties;
 
     @BeforeEach
     void setUp() {
-        amazonS3.createBucket(properties.bucketName());
+        amazonS3Service.createBucket(properties.bucketName());
     }
 
     @Test

@@ -12,7 +12,7 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.utility.DockerImageName;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ProductRepositoryManualStartTest {
 
     static PostgreSQLContainer<?> postgresqlContainer =
-            new PostgreSQLContainer<>(DockerImageName.parse("postgres:14-alpine"));
+            new PostgreSQLContainer<>(DockerImageName.parse("postgres:15.2-alpine"));
 
     @BeforeAll
     static void beforeAll() {

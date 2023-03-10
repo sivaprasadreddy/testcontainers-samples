@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:15.2-alpine
+    environment:
+      - POSTGRES_USER=siva
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=appdb
+  rabbitmq:
+    image: rabbitmq:management

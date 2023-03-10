@@ -12,7 +12,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -24,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ProductRepositoryTest {
 
     @Container
-    static PostgreSQLContainer<?> postgresqlContainer = new PostgreSQLContainer<>(DockerImageName.parse("postgres:14-alpine"));
+    static PostgreSQLContainer<?> postgresqlContainer = new PostgreSQLContainer<>(DockerImageName.parse("postgres:15.2-alpine"));
 
     @DynamicPropertySource
     static void overrideProperties(DynamicPropertyRegistry registry) {
