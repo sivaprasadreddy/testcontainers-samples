@@ -8,20 +8,21 @@ import java.util.List;
 @Service
 @Transactional
 public class ProductService {
-    private final ProductRepository productRepository;
 
-    public ProductService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
+	private final ProductRepository productRepository;
 
-    @Transactional(readOnly = true)
-    public List<Product> getAllProducts() {
-        return productRepository.findAll()
-                .stream().filter(p -> !p.isDisabled()).toList();
-    }
+	public ProductService(ProductRepository productRepository) {
+		this.productRepository = productRepository;
+	}
 
-    @Transactional(readOnly = true)
-    public List<Product> getActiveProducts() {
-        return productRepository.findAllActiveProducts();
-    }
+	@Transactional(readOnly = true)
+	public List<Product> getAllProducts() {
+		return productRepository.findAll().stream().filter(p -> !p.isDisabled()).toList();
+	}
+
+	@Transactional(readOnly = true)
+	public List<Product> getActiveProducts() {
+		return productRepository.findAllActiveProducts();
+	}
+
 }

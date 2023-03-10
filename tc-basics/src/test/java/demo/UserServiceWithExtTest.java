@@ -13,33 +13,33 @@ import java.util.List;
 
 @Testcontainers
 class UserServiceWithExtTest {
-    static DBProvider dbProvider;
-    UserService userService;
 
-    @Container
-    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:15.2-alpine");
+	static DBProvider dbProvider;
 
-    @BeforeAll
-    static void beforeAll() throws SQLException {
-        dbProvider = new DBProvider(
-                "org.postgresql.Driver",
-                postgres.getJdbcUrl(),
-                postgres.getUsername(),
-                postgres.getPassword());
-        dbProvider.createUsersTable();
-    }
+	UserService userService;
 
-    @BeforeEach
-    void setUp() {
-        userService = new UserService(dbProvider);
-    }
+	@Container
+	static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:15.2-alpine");
 
-    @Test
-    void shouldGetUsers() throws SQLException {
-        userService.createUser(new User(1L, "Siva", "siva@gmail.com"));
-        userService.createUser(new User(2L, "John", "john@gmail.com"));
+	@BeforeAll
+	static void beforeAll() throws SQLException {
+		dbProvider = new DBProvider("org.postgresql.Driver", postgres.getJdbcUrl(), postgres.getUsername(),
+				postgres.getPassword());
+		dbProvider.createUsersTable();
+	}
 
-        List<User> users = userService.getAllUsers();
-        Assertions.assertEquals(2, users.size());
-    }
+	@BeforeEach
+	void setUp() {
+		userService = new UserService(dbProvider);
+	}
+
+	@Test
+	void shouldGetUsers() throws SQLException {
+		userService.createUser(new User(1L, "Siva", "siva@gmail.com"));
+		userService.createUser(new User(2L, "John", "john@gmail.com"));
+
+		List<User> users = userService.getAllUsers();
+		Assertions.assertEquals(2, users.size());
+	}
+
 }

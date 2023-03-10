@@ -11,9 +11,15 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductResult {
-    private Long id;
-    private String name;
-    private BigDecimal originalPrice;
-    private BigDecimal discount;
-    private BigDecimal price;
+
+	private Long id;
+
+	private String name;
+
+	private BigDecimal originalPrice;
+
+	private BigDecimal discount;
+
+	private BigDecimal price;
+
 }

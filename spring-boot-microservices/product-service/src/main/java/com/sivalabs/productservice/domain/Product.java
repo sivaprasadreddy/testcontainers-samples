@@ -15,8 +15,12 @@ import jakarta.persistence.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
-    @Id
-    private Long id;
-    private String name;
-    private BigDecimal price;
+
+	@Id
+	private Long id;
+
+	private String name;
+
+	private BigDecimal price;
+
 }

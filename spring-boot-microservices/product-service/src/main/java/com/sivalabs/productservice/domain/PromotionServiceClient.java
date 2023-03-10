@@ -22,77 +22,85 @@ import org.springframework.web.client.RestTemplate;
 @RequiredArgsConstructor
 @Slf4j
 public class PromotionServiceClient {
-    private static final String BACKEND_PROMOTION_SERVICE = "promotionService";
 
-    private final TimeLimiterRegistry timeLimiterRegistry;
-    private final RestTemplate restTemplate;
-    private final ApplicationProperties properties;
+	private static final String BACKEND_PROMOTION_SERVICE = "promotionService";
 
-    @Retry(name = BACKEND_PROMOTION_SERVICE, fallbackMethod = "fallback")
-    @CircuitBreaker(name = BACKEND_PROMOTION_SERVICE)
-    //@io.github.resilience4j.timelimiter.annotation.TimeLimiter(name = BACKEND_PROMOTION_SERVICE, fallbackMethod = "fallback")
-    public List<Promotion> getProductPromotions() {
-        try {
-            List<Promotion> promotions = getTimeLimiter().executeFutureSupplier(
-                    () -> CompletableFuture.supplyAsync(this::getPromotions));
-            log.info("Promotions count: {} ", promotions.size());
-            return promotions;
+	private final TimeLimiterRegistry timeLimiterRegistry;
 
-        } catch (Exception e) {
-            log.error("---------BAM!!!!------");
-            throw new RuntimeException(e);
-        }
-    }
+	private final RestTemplate restTemplate;
 
-    @Retry(name = BACKEND_PROMOTION_SERVICE, fallbackMethod = "fallbackAsyncRetry")
-    @CircuitBreaker(name = BACKEND_PROMOTION_SERVICE)
-    //@io.github.resilience4j.timelimiter.annotation.TimeLimiter(name = BACKEND_PROMOTION_SERVICE, fallbackMethod = "fallbackAsyncTimeout")
-    @io.github.resilience4j.timelimiter.annotation.TimeLimiter(name = BACKEND_PROMOTION_SERVICE)
-    public CompletableFuture<List<Promotion>> getProductPromotionsAsync() {
-        return CompletableFuture.supplyAsync(this::getPromotions);
-    }
+	private final ApplicationProperties properties;
 
-    private List<Promotion> getPromotions() {
-        log.info("Fetching promotions from {}", properties.promotionServiceUrl()+"/api/promotions");
-        HttpHeaders headers = new HttpHeaders();
-        HttpEntity<?> httpEntity = new HttpEntity<>(headers);
-        ResponseEntity<List<Promotion>> response = restTemplate.exchange(
-                properties.promotionServiceUrl()+"/api/promotions", HttpMethod.GET, httpEntity,
-                new ParameterizedTypeReference<>() {});
-        return response.getBody();
-    }
+	@Retry(name = BACKEND_PROMOTION_SERVICE, fallbackMethod = "fallback")
+	@CircuitBreaker(name = BACKEND_PROMOTION_SERVICE)
+	// @io.github.resilience4j.timelimiter.annotation.TimeLimiter(name =
+	// BACKEND_PROMOTION_SERVICE, fallbackMethod = "fallback")
+	public List<Promotion> getProductPromotions() {
+		try {
+			List<Promotion> promotions = getTimeLimiter()
+					.executeFutureSupplier(() -> CompletableFuture.supplyAsync(this::getPromotions));
+			log.info("Promotions count: {} ", promotions.size());
+			return promotions;
 
-    private List<Promotion> fallback(Exception e) {
-        log.error("---------fallback---------");
-        log.error("Error while fetching promotions", e);
-        return List.of();
-    }
+		}
+		catch (Exception e) {
+			log.error("---------BAM!!!!------");
+			throw new RuntimeException(e);
+		}
+	}
 
-    private CompletableFuture<List<Promotion>> fallbackAsync(Exception e) {
-        log.error("Error while fetching promotions", e);
-        log.info("---------fallbackAsync---------");
-        return CompletableFuture.completedFuture(List.of());
-    }
+	@Retry(name = BACKEND_PROMOTION_SERVICE, fallbackMethod = "fallbackAsyncRetry")
+	@CircuitBreaker(name = BACKEND_PROMOTION_SERVICE)
+	// @io.github.resilience4j.timelimiter.annotation.TimeLimiter(name =
+	// BACKEND_PROMOTION_SERVICE, fallbackMethod = "fallbackAsyncTimeout")
+	@io.github.resilience4j.timelimiter.annotation.TimeLimiter(name = BACKEND_PROMOTION_SERVICE)
+	public CompletableFuture<List<Promotion>> getProductPromotionsAsync() {
+		return CompletableFuture.supplyAsync(this::getPromotions);
+	}
 
-    private CompletableFuture<List<Promotion>> fallbackAsyncRetry(Exception e) {
-        log.error("---------fallbackAsyncRetry---------");
-        log.error("Error while fetching promotions", e);
-        return CompletableFuture.completedFuture(List.of());
-    }
+	private List<Promotion> getPromotions() {
+		log.info("Fetching promotions from {}", properties.promotionServiceUrl() + "/api/promotions");
+		HttpHeaders headers = new HttpHeaders();
+		HttpEntity<?> httpEntity = new HttpEntity<>(headers);
+		ResponseEntity<List<Promotion>> response = restTemplate.exchange(
+				properties.promotionServiceUrl() + "/api/promotions", HttpMethod.GET, httpEntity,
+				new ParameterizedTypeReference<>() {
+				});
+		return response.getBody();
+	}
 
-    CompletableFuture<List<Promotion>> fallbackAsyncTimeout(Exception e) {
-        log.error("---------fallbackAsyncTimeout---------");
-        log.error("Error while fetching promotions", e);
-        return CompletableFuture.completedFuture(List.of());
-    }
-    private TimeLimiter getTimeLimiter() {
-        /*TimeLimiterConfig config = TimeLimiterConfig.custom()
-            .cancelRunningFuture(true)
-            .timeoutDuration(Duration.ofMillis(500))
-            .build();
-        TimeLimiterRegistry registry = TimeLimiterRegistry.ofDefaults();
-        return registry.timeLimiter(BACKEND_PROMOTION_SERVICE, config);
-        */
-        return timeLimiterRegistry.timeLimiter(BACKEND_PROMOTION_SERVICE);
-    }
+	private List<Promotion> fallback(Exception e) {
+		log.error("---------fallback---------");
+		log.error("Error while fetching promotions", e);
+		return List.of();
+	}
+
+	private CompletableFuture<List<Promotion>> fallbackAsync(Exception e) {
+		log.error("Error while fetching promotions", e);
+		log.info("---------fallbackAsync---------");
+		return CompletableFuture.completedFuture(List.of());
+	}
+
+	private CompletableFuture<List<Promotion>> fallbackAsyncRetry(Exception e) {
+		log.error("---------fallbackAsyncRetry---------");
+		log.error("Error while fetching promotions", e);
+		return CompletableFuture.completedFuture(List.of());
+	}
+
+	CompletableFuture<List<Promotion>> fallbackAsyncTimeout(Exception e) {
+		log.error("---------fallbackAsyncTimeout---------");
+		log.error("Error while fetching promotions", e);
+		return CompletableFuture.completedFuture(List.of());
+	}
+
+	private TimeLimiter getTimeLimiter() {
+		/*
+		 * TimeLimiterConfig config = TimeLimiterConfig.custom()
+		 * .cancelRunningFuture(true) .timeoutDuration(Duration.ofMillis(500)) .build();
+		 * TimeLimiterRegistry registry = TimeLimiterRegistry.ofDefaults(); return
+		 * registry.timeLimiter(BACKEND_PROMOTION_SERVICE, config);
+		 */
+		return timeLimiterRegistry.timeLimiter(BACKEND_PROMOTION_SERVICE);
+	}
+
 }

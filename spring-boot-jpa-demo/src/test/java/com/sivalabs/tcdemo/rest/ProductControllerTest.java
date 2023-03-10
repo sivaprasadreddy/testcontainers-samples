@@ -16,17 +16,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(controllers = ProductController.class)
 class ProductControllerTest {
 
-    @MockBean
-    private ProductService productService;
+	@MockBean
+	private ProductService productService;
 
-    @Autowired
-    private MockMvc mockMvc;
+	@Autowired
+	private MockMvc mockMvc;
 
-    @Test
-    void shouldReturnActiveProducts() throws Exception {
-        BDDMockito.given(productService.getAllProducts()).willReturn(List.of());
+	@Test
+	void shouldReturnActiveProducts() throws Exception {
+		BDDMockito.given(productService.getAllProducts()).willReturn(List.of());
 
-        mockMvc.perform(get("/api/products"))
-                .andExpect(status().isOk());
-    }
+		mockMvc.perform(get("/api/products")).andExpect(status().isOk());
+	}
+
 }

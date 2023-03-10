@@ -21,54 +21,39 @@ import static org.mockserver.model.JsonBody.json;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-@ContextConfiguration(initializers = { MockServerContainerInitializer.class})
+@ContextConfiguration(initializers = { MockServerContainerInitializer.class })
 public class GithubControllerIntegrationTest {
-    @Autowired
-    protected MockMvc mockMvc;
 
-    private final MockServerClient mockServerClient = new MockServerClient(
-            mockServerContainer.getHost(),
-            mockServerContainer.getServerPort());
+	@Autowired
+	protected MockMvc mockMvc;
 
-    @Test
-    void shouldGetGithubUserProfile() throws Exception {
-        String username = "sivaprasadreddy";
-        mockGetUserFromGithub(username);
-        this.mockMvc.perform(get("/api/users/{username}", username))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.login", is(username)))
-                .andExpect(jsonPath("$.name", is("K. Siva Prasad Reddy")))
-                .andExpect(jsonPath("$.public_repos", is(50)))
-        ;
-        verifyMockServerRequest("GET", "/users/.*", 1);
-    }
+	private final MockServerClient mockServerClient = new MockServerClient(mockServerContainer.getHost(),
+			mockServerContainer.getServerPort());
 
-    private void mockGetUserFromGithub(String username) {
-        mockServerClient.when(
-                        request().withMethod("GET").withPath("/users/.*"))
-                .respond(
-                        response()
-                                .withStatusCode(200)
-                                .withHeaders(new Header("Content-Type", "application/json; charset=utf-8"))
-                                .withBody(json(
-                                        """
-                                        {
-                                        "login": "%s",
-                                        "name": "K. Siva Prasad Reddy",
-                                        "twitter_username": "sivalabs",
-                                        "public_repos": 50
-                                        }
-                                        """.formatted(username)
-                                        ))
-                );
-    }
+	@Test
+	void shouldGetGithubUserProfile() throws Exception {
+		String username = "sivaprasadreddy";
+		mockGetUserFromGithub(username);
+		this.mockMvc.perform(get("/api/users/{username}", username)).andExpect(status().isOk())
+				.andExpect(jsonPath("$.login", is(username))).andExpect(jsonPath("$.name", is("K. Siva Prasad Reddy")))
+				.andExpect(jsonPath("$.public_repos", is(50)));
+		verifyMockServerRequest("GET", "/users/.*", 1);
+	}
 
-    private void verifyMockServerRequest(String method, String path, int times) {
-        mockServerClient.verify(
-                request()
-                        .withMethod(method)
-                        .withPath(path),
-                VerificationTimes.exactly(times)
-        );
-    }
+	private void mockGetUserFromGithub(String username) {
+		mockServerClient.when(request().withMethod("GET").withPath("/users/.*")).respond(response().withStatusCode(200)
+				.withHeaders(new Header("Content-Type", "application/json; charset=utf-8")).withBody(json("""
+						{
+						"login": "%s",
+						"name": "K. Siva Prasad Reddy",
+						"twitter_username": "sivalabs",
+						"public_repos": 50
+						}
+						""".formatted(username))));
+	}
+
+	private void verifyMockServerRequest(String method, String path, int times) {
+		mockServerClient.verify(request().withMethod(method).withPath(path), VerificationTimes.exactly(times));
+	}
+
 }

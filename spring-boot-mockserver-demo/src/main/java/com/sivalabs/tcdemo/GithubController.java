@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 @RequiredArgsConstructor
 public class GithubController {
-    private final GithubService githubService;
 
-    @GetMapping("/users/{username}")
-    public GitHubUser getGithubUserProfile(@PathVariable String username) {
-        return githubService.getGithubUserProfile(username);
-    }
+	private final GithubService githubService;
+
+	@GetMapping("/users/{username}")
+	public GitHubUser getGithubUserProfile(@PathVariable String username) {
+		return githubService.getGithubUserProfile(username);
+	}
+
 }

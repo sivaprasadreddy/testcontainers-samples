@@ -15,12 +15,13 @@ import java.util.List;
 @RequestMapping("/api/products")
 @RequiredArgsConstructor
 public class ProductController {
-    private final ProductService productService;
 
-    @GetMapping("/{code}")
-    public ResponseEntity<Product> getById(@PathVariable String code) {
-        return productService.getByCode(code)
-                .map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
-    }
+	private final ProductService productService;
+
+	@GetMapping("/{code}")
+	public ResponseEntity<Product> getById(@PathVariable String code) {
+		return productService.getByCode(code).map(ResponseEntity::ok)
+				.orElseGet(() -> ResponseEntity.notFound().build());
+	}
+
 }

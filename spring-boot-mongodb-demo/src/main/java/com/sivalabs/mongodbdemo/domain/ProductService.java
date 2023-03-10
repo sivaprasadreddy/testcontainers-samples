@@ -10,18 +10,20 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 public class ProductService {
-    private final ProductRepository productRepository;
 
-    @Transactional(readOnly = true)
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
-    }
+	private final ProductRepository productRepository;
 
-    public Product saveProduct(Product product) {
-        return productRepository.save(product);
-    }
+	@Transactional(readOnly = true)
+	public List<Product> getAllProducts() {
+		return productRepository.findAll();
+	}
 
-    public void deleteAll() {
-        productRepository.deleteAll();
-    }
+	public Product saveProduct(Product product) {
+		return productRepository.save(product);
+	}
+
+	public void deleteAll() {
+		productRepository.deleteAll();
+	}
+
 }

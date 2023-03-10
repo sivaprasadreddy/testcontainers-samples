@@ -5,4 +5,5 @@ import io.micronaut.data.repository.CrudRepository;
 
 @Repository
 public interface TodoRepository extends CrudRepository<Todo, Long> {
+
 }

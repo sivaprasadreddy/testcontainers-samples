@@ -16,9 +16,13 @@ import jakarta.persistence.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Promotion {
-    @Id
-    private Long id;
-    @Column(unique = true)
-    private Long productId;
-    private BigDecimal discount;
+
+	@Id
+	private Long id;
+
+	@Column(unique = true)
+	private Long productId;
+
+	private BigDecimal discount;
+
 }

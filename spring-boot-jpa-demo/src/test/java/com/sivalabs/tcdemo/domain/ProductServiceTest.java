@@ -12,28 +12,29 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class ProductServiceTest {
 
-    private ProductRepository productRepository;
-    private ProductService productService;
+	private ProductRepository productRepository;
 
-    @BeforeEach
-    void setUp() {
-        productRepository = Mockito.mock(ProductRepository.class);
-        productService = new ProductService(productRepository);
-    }
+	private ProductService productService;
 
-    @Test
-    void shouldReturnOnlyActiveProducts() {
-        //Arrange
-        Product p1 = new Product(1L, "p-name1", "p-desc1", BigDecimal.TEN, false);
-        Product p2 = new Product(2L, "p-name2", "p-desc2", BigDecimal.TEN, true);
-        BDDMockito.given(productRepository.findAll()).willReturn(List.of(p1, p2));
+	@BeforeEach
+	void setUp() {
+		productRepository = Mockito.mock(ProductRepository.class);
+		productService = new ProductService(productRepository);
+	}
 
+	@Test
+	void shouldReturnOnlyActiveProducts() {
+		// Arrange
+		Product p1 = new Product(1L, "p-name1", "p-desc1", BigDecimal.TEN, false);
+		Product p2 = new Product(2L, "p-name2", "p-desc2", BigDecimal.TEN, true);
+		BDDMockito.given(productRepository.findAll()).willReturn(List.of(p1, p2));
 
-        //Act
-        List<Product> products = productService.getAllProducts();
+		// Act
+		List<Product> products = productService.getAllProducts();
 
-        //Assert
-        assertThat(products).hasSize(1);
-        assertThat(products.get(0).getId()).isEqualTo(1L);
-    }
+		// Assert
+		assertThat(products).hasSize(1);
+		assertThat(products.get(0).getId()).isEqualTo(1L);
+	}
+
 }

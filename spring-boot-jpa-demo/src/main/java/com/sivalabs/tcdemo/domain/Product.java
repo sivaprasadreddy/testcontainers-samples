@@ -16,19 +16,19 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class Product {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_id_generator")
-    @SequenceGenerator(name = "product_id_generator", sequenceName = "product_id_seq")
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_id_generator")
+	@SequenceGenerator(name = "product_id_generator", sequenceName = "product_id_seq")
+	private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String name;
+	@Column(nullable = false, unique = true)
+	private String name;
 
-    private String description;
+	private String description;
 
-    @Column(nullable = false)
-    private BigDecimal price;
+	@Column(nullable = false)
+	private BigDecimal price;
 
-    private boolean disabled;
+	private boolean disabled;
 
 }

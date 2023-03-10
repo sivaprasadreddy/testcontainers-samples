@@ -9,11 +9,13 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Slf4j
 public class ProductEventListener {
-    private final ProductService productService;
 
-    @RabbitListener(queues="products")
-    public void handle(CreateProductRequest request) {
-        Product product = new Product(null, request.getCode(), request.getName(), request.getPrice());
-        productService.save(product);
-    }
+	private final ProductService productService;
+
+	@RabbitListener(queues = "products")
+	public void handle(CreateProductRequest request) {
+		Product product = new Product(null, request.getCode(), request.getName(), request.getPrice());
+		productService.save(product);
+	}
+
 }

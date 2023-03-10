@@ -16,30 +16,32 @@ import static io.micronaut.http.HttpStatus.OK;
 
 @MicronautTest
 class TodoControllerTest {
-    private BlockingHttpClient blockingClient;
 
-    @Inject
-    @Client("/")
-    HttpClient client;
+	private BlockingHttpClient blockingClient;
 
-    @BeforeEach
-    void setup() {
-        blockingClient = client.toBlocking();
-    }
+	@Inject
+	@Client("/")
+	HttpClient client;
 
-    @Test
-    void shouldCreateTodo() {
-        HttpRequest<?> request = HttpRequest.POST("/todos", new Todo(null, "DevOps", false));
-        HttpResponse<?> response = blockingClient.exchange(request);
+	@BeforeEach
+	void setup() {
+		blockingClient = client.toBlocking();
+	}
 
-        assertEquals(CREATED, response.getStatus());
-    }
+	@Test
+	void shouldCreateTodo() {
+		HttpRequest<?> request = HttpRequest.POST("/todos", new Todo(null, "DevOps", false));
+		HttpResponse<?> response = blockingClient.exchange(request);
 
-    @Test
-    void shouldGetAllTodos() {
-        HttpRequest<?> request = HttpRequest.GET("/todos");
-        HttpResponse<?> response = blockingClient.exchange(request);
+		assertEquals(CREATED, response.getStatus());
+	}
 
-        assertEquals(OK, response.getStatus());
-    }
+	@Test
+	void shouldGetAllTodos() {
+		HttpRequest<?> request = HttpRequest.GET("/todos");
+		HttpResponse<?> response = blockingClient.exchange(request);
+
+		assertEquals(OK, response.getStatus());
+	}
+
 }

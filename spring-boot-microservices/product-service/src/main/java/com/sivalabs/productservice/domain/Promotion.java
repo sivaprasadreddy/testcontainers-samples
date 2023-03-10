@@ -7,7 +7,11 @@ import lombok.Setter;
 @Setter
 @Getter
 public class Promotion {
-    private Long id;
-    private Long productId;
-    private BigDecimal discount;
+
+	private Long id;
+
+	private Long productId;
+
+	private BigDecimal discount;
+
 }

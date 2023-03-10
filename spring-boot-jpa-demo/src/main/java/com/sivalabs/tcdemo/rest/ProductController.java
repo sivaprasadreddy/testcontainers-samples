@@ -9,14 +9,16 @@ import java.util.List;
 
 @RestController
 public class ProductController {
-    private final ProductService productService;
 
-    public ProductController(ProductService productService) {
-        this.productService = productService;
-    }
+	private final ProductService productService;
 
-    @GetMapping("/api/products")
-    public List<Product> getAllProducts() {
-        return productService.getAllProducts();
-    }
+	public ProductController(ProductService productService) {
+		this.productService = productService;
+	}
+
+	@GetMapping("/api/products")
+	public List<Product> getAllProducts() {
+		return productService.getAllProducts();
+	}
+
 }

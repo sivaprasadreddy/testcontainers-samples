@@ -30,52 +30,47 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @Testcontainers
 class ProductControllerTest {
-    @Container
-    static MongoDBContainer mongo = new MongoDBContainer(DockerImageName.parse("mongo:4.0.10"));
 
-    @DynamicPropertySource
-    static void configureProperties(DynamicPropertyRegistry registry) {
-        registry.add("spring.data.mongodb.uri", mongo::getReplicaSetUrl);
-    }
+	@Container
+	static MongoDBContainer mongo = new MongoDBContainer(DockerImageName.parse("mongo:4.0.10"));
 
-    @Autowired
-    private MockMvc mockMvc;
+	@DynamicPropertySource
+	static void configureProperties(DynamicPropertyRegistry registry) {
+		registry.add("spring.data.mongodb.uri", mongo::getReplicaSetUrl);
+	}
 
-    @Autowired
-    private ProductService productService;
+	@Autowired
+	private MockMvc mockMvc;
 
-    @BeforeEach
-    void setUp() {
-        productService.deleteAll();
-        List<Product> products = List.of(
-                new Product(null, "product-1 name", "product-1 desc", new BigDecimal("24.50")),
-                new Product(null, "product-2 name", "product-2 desc", new BigDecimal("54.50"))
-        );
-        products.forEach(productService::saveProduct);
-    }
+	@Autowired
+	private ProductService productService;
 
-    @Test
-    void shouldReturnAllProducts() throws Exception {
-        mockMvc.perform(get("/api/products"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.size()", Matchers.equalTo(2)));
-    }
+	@BeforeEach
+	void setUp() {
+		productService.deleteAll();
+		List<Product> products = List.of(new Product(null, "product-1 name", "product-1 desc", new BigDecimal("24.50")),
+				new Product(null, "product-2 name", "product-2 desc", new BigDecimal("54.50")));
+		products.forEach(productService::saveProduct);
+	}
 
-    @Test
-    void shouldSaveProduct() throws Exception {
-        mockMvc.perform(post("/api/products")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("""
-                                {
-                                    "name": "test product",
-                                    "description": "test product description",
-                                    "price": 24.50
-                                }
-                                """))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.id", Matchers.notNullValue()))
-                .andExpect(jsonPath("$.name", Matchers.equalTo("test product")))
-                .andExpect(jsonPath("$.description", Matchers.equalTo("test product description")))
-                .andExpect(jsonPath("$.price", Matchers.equalTo(24.5)));
-    }
+	@Test
+	void shouldReturnAllProducts() throws Exception {
+		mockMvc.perform(get("/api/products")).andExpect(status().isOk())
+				.andExpect(jsonPath("$.size()", Matchers.equalTo(2)));
+	}
+
+	@Test
+	void shouldSaveProduct() throws Exception {
+		mockMvc.perform(post("/api/products").contentType(MediaType.APPLICATION_JSON).content("""
+				{
+				    "name": "test product",
+				    "description": "test product description",
+				    "price": 24.50
+				}
+				""")).andExpect(status().isCreated()).andExpect(jsonPath("$.id", Matchers.notNullValue()))
+				.andExpect(jsonPath("$.name", Matchers.equalTo("test product")))
+				.andExpect(jsonPath("$.description", Matchers.equalTo("test product description")))
+				.andExpect(jsonPath("$.price", Matchers.equalTo(24.5)));
+	}
+
 }

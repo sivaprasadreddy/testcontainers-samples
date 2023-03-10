@@ -13,15 +13,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-@ContextConfiguration(initializers = {PostgresDatabaseContainerInitializer.class})
+@ContextConfiguration(initializers = { PostgresDatabaseContainerInitializer.class })
 class ProductControllerIntegrationTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+	@Autowired
+	private MockMvc mockMvc;
 
-    @Test
-    void shouldReturnActiveProducts() throws Exception {
-        mockMvc.perform(get("/api/products"))
-                .andExpect(status().isOk());
-    }
+	@Test
+	void shouldReturnActiveProducts() throws Exception {
+		mockMvc.perform(get("/api/products")).andExpect(status().isOk());
+	}
+
 }

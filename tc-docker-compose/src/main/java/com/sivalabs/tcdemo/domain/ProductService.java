@@ -16,15 +16,17 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Slf4j
 public class ProductService {
-    private final ProductRepository productRepository;
 
-    @Transactional(readOnly = true)
-    public Optional<Product> getByCode(String code) {
-        log.info("Fetching product by code:{}", code);
-        return productRepository.findByCode(code);
-    }
+	private final ProductRepository productRepository;
 
-    public void save(Product product) {
-        productRepository.save(product);
-    }
+	@Transactional(readOnly = true)
+	public Optional<Product> getByCode(String code) {
+		log.info("Fetching product by code:{}", code);
+		return productRepository.findByCode(code);
+	}
+
+	public void save(Product product) {
+		productRepository.save(product);
+	}
+
 }

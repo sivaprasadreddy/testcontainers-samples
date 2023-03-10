@@ -16,14 +16,16 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 public class DocumentController {
-    private final DocumentService documentService;
 
-    @PostMapping("/docs")
-    public Map<String, String> uploadDocs(@RequestParam("file") MultipartFile multipartFile) throws IOException {
-        var filename = multipartFile.getOriginalFilename();
-        var extn = filename.substring(filename.lastIndexOf("."));
-        filename = UUID.randomUUID()+extn;
-        documentService.upload(filename, multipartFile.getInputStream());
-        return Map.of("filename", filename);
-    }
+	private final DocumentService documentService;
+
+	@PostMapping("/docs")
+	public Map<String, String> uploadDocs(@RequestParam("file") MultipartFile multipartFile) throws IOException {
+		var filename = multipartFile.getOriginalFilename();
+		var extn = filename.substring(filename.lastIndexOf("."));
+		filename = UUID.randomUUID() + extn;
+		documentService.upload(filename, multipartFile.getInputStream());
+		return Map.of("filename", filename);
+	}
+
 }

@@ -15,17 +15,18 @@ import java.util.List;
 @Controller("/todos")
 @RequiredArgsConstructor
 public class TodoController {
-    private final TodoRepository repo;
 
-    @Get
-    Iterable<Todo> list() {
-        return repo.findAll();
-    }
+	private final TodoRepository repo;
 
-    @Post
-    HttpResponse<Todo> save(@Body Todo todo) {
-        Todo savedTodo = repo.save(todo);
-        return HttpResponse
-                .created(savedTodo);
-    }
+	@Get
+	Iterable<Todo> list() {
+		return repo.findAll();
+	}
+
+	@Post
+	HttpResponse<Todo> save(@Body Todo todo) {
+		Todo savedTodo = repo.save(todo);
+		return HttpResponse.created(savedTodo);
+	}
+
 }

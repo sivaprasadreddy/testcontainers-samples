@@ -21,11 +21,15 @@ import static javax.persistence.GenerationType.AUTO;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Todo {
-    @Id
-    @GeneratedValue(strategy = AUTO)
-    private Long id;
-    @NotNull
-    @Column(name = "content", nullable = false)
-    private String content;
-    private boolean done;
+
+	@Id
+	@GeneratedValue(strategy = AUTO)
+	private Long id;
+
+	@NotNull
+	@Column(name = "content", nullable = false)
+	private String content;
+
+	private boolean done;
+
 }

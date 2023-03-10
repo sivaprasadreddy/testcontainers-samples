@@ -15,51 +15,43 @@ import java.util.List;
 
 @Testcontainers
 public class ProductServiceTest {
-    static DBProvider dbProvider;
-    ProductService productService;
 
-    @Container
-    static GenericContainer postgres = new GenericContainer<>(
-                new ImageFromDockerfile()
-                    .withFileFromClasspath("Dockerfile", "Dockerfile")
-                    .withFileFromClasspath("sql/1-initdb.sql", "sql/1-initdb.sql")
-            )
-            .withEnv("POSTGRES_USER","siva")
-            .withEnv("POSTGRES_PASSWORD","secret")
-            .withEnv("POSTGRES_DB","appdb")
-            .withExposedPorts(5432)
-            ;
+	static DBProvider dbProvider;
 
-    /*@Container
-    static GenericContainer postgres = new GenericContainer<>(new ImageFromDockerfile()
-            .withDockerfileFromBuilder(builder ->
-                    builder
-                            .from("postgres:15.2-alpine")
-                            .build()))
-            .withClasspathResourceMapping("sql/", "/docker-entrypoint-initdb.d/", BindMode.READ_ONLY)
-            .withEnv("POSTGRES_USER","siva")
-            .withEnv("POSTGRES_PASSWORD","secret")
-            .withEnv("POSTGRES_DB","appdb")
-            .withExposedPorts(5432)
-            ;*/
+	ProductService productService;
 
-    @BeforeAll
-    static void beforeAll() throws SQLException {
-        dbProvider = new DBProvider(
-                "org.postgresql.Driver",
-                "jdbc:postgresql://"+postgres.getHost()+":"+postgres.getMappedPort(5432)+"/appdb",
-                "siva",
-                "secret");
-    }
+	@Container
+	static GenericContainer postgres = new GenericContainer<>(
+			new ImageFromDockerfile().withFileFromClasspath("Dockerfile", "Dockerfile")
+					.withFileFromClasspath("sql/1-initdb.sql", "sql/1-initdb.sql")).withEnv("POSTGRES_USER", "siva")
+							.withEnv("POSTGRES_PASSWORD", "secret").withEnv("POSTGRES_DB", "appdb")
+							.withExposedPorts(5432);
 
-    @BeforeEach
-    void setUp() {
-        productService = new ProductService(dbProvider);
-    }
+	/*
+	 * @Container static GenericContainer postgres = new GenericContainer<>(new
+	 * ImageFromDockerfile() .withDockerfileFromBuilder(builder -> builder
+	 * .from("postgres:15.2-alpine") .build())) .withClasspathResourceMapping("sql/",
+	 * "/docker-entrypoint-initdb.d/", BindMode.READ_ONLY)
+	 * .withEnv("POSTGRES_USER","siva") .withEnv("POSTGRES_PASSWORD","secret")
+	 * .withEnv("POSTGRES_DB","appdb") .withExposedPorts(5432) ;
+	 */
 
-    @Test
-    void shouldGetProducts() throws SQLException {
-        List<Product> products = productService.getAll();
-        Assertions.assertEquals(3, products.size());
-    }
+	@BeforeAll
+	static void beforeAll() throws SQLException {
+		dbProvider = new DBProvider("org.postgresql.Driver",
+				"jdbc:postgresql://" + postgres.getHost() + ":" + postgres.getMappedPort(5432) + "/appdb", "siva",
+				"secret");
+	}
+
+	@BeforeEach
+	void setUp() {
+		productService = new ProductService(dbProvider);
+	}
+
+	@Test
+	void shouldGetProducts() throws SQLException {
+		List<Product> products = productService.getAll();
+		Assertions.assertEquals(3, products.size());
+	}
+
 }

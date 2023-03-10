@@ -16,35 +16,28 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.jupiter.api.Assertions.*;
 
 @QuarkusTest
-//@QuarkusTestResource(PostgresResource.class)
+// @QuarkusTestResource(PostgresResource.class)
 class TodoControllerTest {
 
-    @Test
-    void allTodos() {
-        List<Todo> todoList = given()
-                .when().get("/api/todos")
-                .then()
-                .statusCode(200)
-                .extract().as(new TypeRef<List<Todo>>() {
-                });
-        Assertions.assertNotNull(todoList);
-    }
+	@Test
+	void allTodos() {
+		List<Todo> todoList = given().when().get("/api/todos").then().statusCode(200).extract()
+				.as(new TypeRef<List<Todo>>() {
+				});
+		Assertions.assertNotNull(todoList);
+	}
 
-    @Test
-    void createTodo() {
-        String body = """
-                    {
-                    "content" : "Learn ABCDEF",
-                    "done": false
-                    }
-                    """;
-        given()
-            .contentType(ContentType.JSON)
-            .body(body)
+	@Test
+	void createTodo() {
+		String body = """
+				{
+				"content" : "Learn ABCDEF",
+				"done": false
+				}
+				""";
+		given().contentType(ContentType.JSON).body(body)
 
-        .when()
-            .post("/api/todos")
-        .then()
-                .statusCode(201);
-    }
+				.when().post("/api/todos").then().statusCode(201);
+	}
+
 }

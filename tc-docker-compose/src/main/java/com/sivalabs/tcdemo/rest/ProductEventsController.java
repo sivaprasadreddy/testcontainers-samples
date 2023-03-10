@@ -17,11 +17,13 @@ import static com.sivalabs.tcdemo.config.RabbitMQConfig.topicExchangeName;
 @RequiredArgsConstructor
 @Slf4j
 public class ProductEventsController {
-    private final RabbitTemplate rabbitTemplate;
 
-    @PostMapping
-    public void handleEvent(@RequestBody CreateProductRequest payload) {
-        rabbitTemplate.convertAndSend(topicExchangeName, routingKey, payload);
-        log.info("CreateProductRequest published to RabbitMQ");
-    }
+	private final RabbitTemplate rabbitTemplate;
+
+	@PostMapping
+	public void handleEvent(@RequestBody CreateProductRequest payload) {
+		rabbitTemplate.convertAndSend(topicExchangeName, routingKey, payload);
+		log.info("CreateProductRequest published to RabbitMQ");
+	}
+
 }

@@ -24,40 +24,40 @@ import static org.testcontainers.containers.localstack.LocalStackContainer.Servi
 @Testcontainers
 class DocumentServiceTest {
 
-    @Container
-    static LocalStackContainer localStack = new LocalStackContainer(
-            DockerImageName.parse("localstack/localstack:1.4"))
-            .withServices(S3);
+	@Container
+	static LocalStackContainer localStack = new LocalStackContainer(DockerImageName.parse("localstack/localstack:1.4"))
+			.withServices(S3);
 
-    @DynamicPropertySource
-    static void overrideProperties(DynamicPropertyRegistry registry) {
-        String awsEndpoint = "http://" + localStack.getHost() + ":" + localStack.getFirstMappedPort();
-        registry.add("spring.cloud.aws.endpoint", () -> awsEndpoint);
-        registry.add("spring.cloud.aws.region.static", () -> localStack.getRegion());
-        registry.add("spring.cloud.aws.credentials.access-key", () -> localStack.getAccessKey());
-        registry.add("spring.cloud.aws.credentials.secret-key", () -> localStack.getSecretKey());
-        registry.add("spring.cloud.aws.s3.path-style-access-enabled", () -> true);
-    }
+	@DynamicPropertySource
+	static void overrideProperties(DynamicPropertyRegistry registry) {
+		String awsEndpoint = "http://" + localStack.getHost() + ":" + localStack.getFirstMappedPort();
+		registry.add("spring.cloud.aws.endpoint", () -> awsEndpoint);
+		registry.add("spring.cloud.aws.region.static", () -> localStack.getRegion());
+		registry.add("spring.cloud.aws.credentials.access-key", () -> localStack.getAccessKey());
+		registry.add("spring.cloud.aws.credentials.secret-key", () -> localStack.getSecretKey());
+		registry.add("spring.cloud.aws.s3.path-style-access-enabled", () -> true);
+	}
 
-    @Autowired
-    private DocumentService documentService;
+	@Autowired
+	private DocumentService documentService;
 
-    @Autowired
-    private AmazonS3Service amazonS3Service;
+	@Autowired
+	private AmazonS3Service amazonS3Service;
 
-    @Autowired
-    private ApplicationProperties properties;
+	@Autowired
+	private ApplicationProperties properties;
 
-    @BeforeEach
-    void setUp() {
-        amazonS3Service.createBucket(properties.bucketName());
-    }
+	@BeforeEach
+	void setUp() {
+		amazonS3Service.createBucket(properties.bucketName());
+	}
 
-    @Test
-    void shouldUpload() {
-        InputStream is = new ByteArrayInputStream("sivalabs".getBytes(StandardCharsets.UTF_8));
-        documentService.upload("first.txt", is);
-        List<String> files = documentService.listFiles(properties.bucketName());
-        assertThat(files).contains("first.txt");
-    }
+	@Test
+	void shouldUpload() {
+		InputStream is = new ByteArrayInputStream("sivalabs".getBytes(StandardCharsets.UTF_8));
+		documentService.upload("first.txt", is);
+		List<String> files = documentService.listFiles(properties.bucketName());
+		assertThat(files).contains("first.txt");
+	}
+
 }

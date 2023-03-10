@@ -32,56 +32,48 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Testcontainers
 @Disabled
 public class GithubControllerWireMockTCTest {
-    @Autowired
-    protected MockMvc mockMvc;
 
-    private static WireMockServer wireMockServer;
+	@Autowired
+	protected MockMvc mockMvc;
 
-    static DockerImageName imageName = DockerImageName.parse("wiremock/wiremock:2.35.0-alpine");
+	private static WireMockServer wireMockServer;
 
-    @Container
-    static GenericContainer<?> wiremockContainer = new GenericContainer<>(imageName)
-            .withExposedPorts(8080);
+	static DockerImageName imageName = DockerImageName.parse("wiremock/wiremock:2.35.0-alpine");
 
-    @DynamicPropertySource
-    static void configureProperties(DynamicPropertyRegistry registry) {
-        String host = wiremockContainer.getHost();
-        Integer mappedPort = wiremockContainer.getMappedPort(8080);
-        String wireMockUrl = "http://"+ host +":"+ mappedPort;
-        System.out.println("wireMockUrl:"+wireMockUrl);
-        wireMockServer = new WireMockServer(options().bindAddress(host).port(mappedPort));
-        wireMockServer.start();
-        System.out.println("baseUrl:"+wireMockServer.baseUrl());
-        registry.add("github.api.base-url", wireMockServer::baseUrl);
-    }
+	@Container
+	static GenericContainer<?> wiremockContainer = new GenericContainer<>(imageName).withExposedPorts(8080);
 
-    @Test
-    void shouldGetGithubUserProfile() throws Exception {
-        String username = "sivaprasadreddy";
-        mockGetUserFromGithub(username);
-        this.mockMvc.perform(get("/api/users/{username}", username))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.login", is(username)))
-                .andExpect(jsonPath("$.name", is("K. Siva Prasad Reddy")))
-                .andExpect(jsonPath("$.public_repos", is(50)))
-        ;
-    }
+	@DynamicPropertySource
+	static void configureProperties(DynamicPropertyRegistry registry) {
+		String host = wiremockContainer.getHost();
+		Integer mappedPort = wiremockContainer.getMappedPort(8080);
+		String wireMockUrl = "http://" + host + ":" + mappedPort;
+		System.out.println("wireMockUrl:" + wireMockUrl);
+		wireMockServer = new WireMockServer(options().bindAddress(host).port(mappedPort));
+		wireMockServer.start();
+		System.out.println("baseUrl:" + wireMockServer.baseUrl());
+		registry.add("github.api.base-url", wireMockServer::baseUrl);
+	}
 
-    private void mockGetUserFromGithub(String username) {
-        wireMockServer.stubFor(
-                WireMock.get(urlMatching("/users/.*"))
-                        .willReturn(aResponse()
-                                .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
-                                .withBody(
-                                        """
-                                        {
-                                        "login": "%s",
-                                        "name": "K. Siva Prasad Reddy",
-                                        "twitter_username": "sivalabs",
-                                        "public_repos": 50
-                                        }
-                                        """.formatted(username)
-                                ))
-        );
-    }
+	@Test
+	void shouldGetGithubUserProfile() throws Exception {
+		String username = "sivaprasadreddy";
+		mockGetUserFromGithub(username);
+		this.mockMvc.perform(get("/api/users/{username}", username)).andExpect(status().isOk())
+				.andExpect(jsonPath("$.login", is(username))).andExpect(jsonPath("$.name", is("K. Siva Prasad Reddy")))
+				.andExpect(jsonPath("$.public_repos", is(50)));
+	}
+
+	private void mockGetUserFromGithub(String username) {
+		wireMockServer.stubFor(WireMock.get(urlMatching("/users/.*"))
+				.willReturn(aResponse().withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE).withBody("""
+						{
+						"login": "%s",
+						"name": "K. Siva Prasad Reddy",
+						"twitter_username": "sivalabs",
+						"public_repos": 50
+						}
+						""".formatted(username))));
+	}
+
 }

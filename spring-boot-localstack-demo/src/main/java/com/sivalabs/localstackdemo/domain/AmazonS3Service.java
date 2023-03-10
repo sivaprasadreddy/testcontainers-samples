@@ -27,54 +27,45 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class AmazonS3Service {
-    private final S3Client s3Client;
 
-    public void listBuckets() {
-        ListBucketsRequest listBucketsRequest = ListBucketsRequest.builder().build();
-        ListBucketsResponse listBucketsResponse = s3Client.listBuckets(listBucketsRequest);
-        listBucketsResponse.buckets().forEach(x -> System.out.println(x.name()));
-    }
+	private final S3Client s3Client;
 
-    public void createBucket(String bucketName) {
-        CreateBucketRequest bucketRequest = CreateBucketRequest.builder()
-                .bucket(bucketName)
-                .build();
-        s3Client.createBucket(bucketRequest);
-    }
+	public void listBuckets() {
+		ListBucketsRequest listBucketsRequest = ListBucketsRequest.builder().build();
+		ListBucketsResponse listBucketsResponse = s3Client.listBuckets(listBucketsRequest);
+		listBucketsResponse.buckets().forEach(x -> System.out.println(x.name()));
+	}
 
-    public void upload(String bucketName, String key, InputStream inputStream) throws IOException {
-        PutObjectRequest objectRequest = PutObjectRequest.builder()
-                .bucket(bucketName)
-                .key(key)
-                .build();
+	public void createBucket(String bucketName) {
+		CreateBucketRequest bucketRequest = CreateBucketRequest.builder().bucket(bucketName).build();
+		s3Client.createBucket(bucketRequest);
+	}
 
-        s3Client.putObject(objectRequest, RequestBody.fromBytes(inputStream.readAllBytes()));
-    }
+	public void upload(String bucketName, String key, InputStream inputStream) throws IOException {
+		PutObjectRequest objectRequest = PutObjectRequest.builder().bucket(bucketName).key(key).build();
 
-    public List<String> listBucketObjects(String bucketName) {
-        List<String> files = new ArrayList<>();
-        ListObjectsRequest listObjects = ListObjectsRequest
-                .builder()
-                .bucket(bucketName)
-                .build();
+		s3Client.putObject(objectRequest, RequestBody.fromBytes(inputStream.readAllBytes()));
+	}
 
-        ListObjectsResponse res = s3Client.listObjects(listObjects);
-        List<S3Object> objects = res.contents();
-        for (S3Object myValue : objects) {
-            String key = myValue.key();
-            System.out.println("The name of the key is " + key);
-            files.add(key);
+	public List<String> listBucketObjects(String bucketName) {
+		List<String> files = new ArrayList<>();
+		ListObjectsRequest listObjects = ListObjectsRequest.builder().bucket(bucketName).build();
 
-        }
-        return files;
-    }
+		ListObjectsResponse res = s3Client.listObjects(listObjects);
+		List<S3Object> objects = res.contents();
+		for (S3Object myValue : objects) {
+			String key = myValue.key();
+			System.out.println("The name of the key is " + key);
+			files.add(key);
 
-    public void download(String bucketName, String key) throws IOException {
-        GetObjectRequest getObjectRequest = GetObjectRequest.builder()
-                .bucket(bucketName)
-                .key(key)
-                .build();
+		}
+		return files;
+	}
 
-        s3Client.getObject(getObjectRequest).transferTo(new PrintStream(System.out));
-    }
+	public void download(String bucketName, String key) throws IOException {
+		GetObjectRequest getObjectRequest = GetObjectRequest.builder().bucket(bucketName).key(key).build();
+
+		s3Client.getObject(getObjectRequest).transferTo(new PrintStream(System.out));
+	}
+
 }

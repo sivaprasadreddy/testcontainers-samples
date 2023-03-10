@@ -9,14 +9,16 @@ import java.util.List;
 
 @RestController
 public class CustomerController {
-    private final CustomerService customerService;
 
-    public CustomerController(CustomerService customerService) {
-        this.customerService = customerService;
-    }
+	private final CustomerService customerService;
 
-    @GetMapping("/api/customers")
-    public List<Customer> getAllCustomers() {
-        return customerService.getAllCustomers();
-    }
+	public CustomerController(CustomerService customerService) {
+		this.customerService = customerService;
+	}
+
+	@GetMapping("/api/customers")
+	public List<Customer> getAllCustomers() {
+		return customerService.getAllCustomers();
+	}
+
 }

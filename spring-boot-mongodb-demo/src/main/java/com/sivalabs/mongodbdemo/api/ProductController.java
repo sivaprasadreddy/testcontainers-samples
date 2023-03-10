@@ -17,16 +17,18 @@ import java.util.List;
 @RequestMapping("/api/products")
 @RequiredArgsConstructor
 public class ProductController {
-    private final ProductService productService;
 
-    @GetMapping
-    public List<Product> getAllProducts() {
-        return productService.getAllProducts();
-    }
+	private final ProductService productService;
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Product saveProduct(@RequestBody Product product) {
-        return productService.saveProduct(product);
-    }
+	@GetMapping
+	public List<Product> getAllProducts() {
+		return productService.getAllProducts();
+	}
+
+	@PostMapping
+	@ResponseStatus(HttpStatus.CREATED)
+	public Product saveProduct(@RequestBody Product product) {
+		return productService.saveProduct(product);
+	}
+
 }
