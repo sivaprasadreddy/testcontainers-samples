@@ -1,7 +1,9 @@
-name: Build
+name: Build quarkus-jpa-demo
 
 on:
   push:
+    paths:
+      - quarkus-jpa-demo/**
     branches:
       - '**'
 
@@ -9,19 +11,18 @@ jobs:
   test:
     name: Run Tests
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./quarkus-jpa-demo
     steps:
       - uses: actions/checkout@v3
-      - name: Cache local Maven repository
-        uses: actions/cache@v2
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-maven-
+
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'temurin'
+          cache: 'maven'
 
       - name: Test
         run: ./mvnw verify
