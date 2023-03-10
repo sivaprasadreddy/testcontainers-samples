@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @TestPropertySource(properties = {
-        "spring.datasource.url=jdbc:tc:postgresql:14.3-alpine:///demodb"
+        "spring.datasource.url=jdbc:tc:postgresql:15.2-alpine:///demodb"
 })
 class ProductRepositoryWithTCJdbcUrlTest {
 
