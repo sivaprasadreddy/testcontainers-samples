@@ -28,8 +28,8 @@ public class WireMockContainerInitializer implements ApplicationContextInitializ
 
 		var imageName = DockerImageName.parse("wiremock/wiremock:2.35.0-alpine");
 		var wiremockContainer = new GenericContainer(imageName).withExposedPorts(8080)
-				.withClasspathResourceMapping("/wiremock", "/home/wiremock", BindMode.READ_ONLY)
-				.waitingFor(Wait.forHttp("/__admin/mappings").withMethod("GET").forStatusCode(200));
+			.withClasspathResourceMapping("/wiremock", "/home/wiremock", BindMode.READ_ONLY)
+			.waitingFor(Wait.forHttp("/__admin/mappings").withMethod("GET").forStatusCode(200));
 		wiremockContainer.start();
 		String host = wiremockContainer.getHost();
 		Integer mappedPort = wiremockContainer.getMappedPort(8080);
@@ -46,7 +46,7 @@ public class WireMockContainerInitializer implements ApplicationContextInitializ
 
 		log.info("Setting Github API BaseUrl:" + wireMockUrl);
 		TestPropertyValues.of("github.api.base-url=" + wireMockUrl)
-				.applyTo(configurableApplicationContext.getEnvironment());
+			.applyTo(configurableApplicationContext.getEnvironment());
 	}
 
 }

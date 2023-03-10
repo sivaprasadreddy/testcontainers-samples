@@ -23,9 +23,11 @@ public class ProductServiceTest {
 	@Container
 	static GenericContainer postgres = new GenericContainer<>(
 			new ImageFromDockerfile().withFileFromClasspath("Dockerfile", "Dockerfile")
-					.withFileFromClasspath("sql/1-initdb.sql", "sql/1-initdb.sql")).withEnv("POSTGRES_USER", "siva")
-							.withEnv("POSTGRES_PASSWORD", "secret").withEnv("POSTGRES_DB", "appdb")
-							.withExposedPorts(5432);
+				.withFileFromClasspath("sql/1-initdb.sql", "sql/1-initdb.sql"))
+		.withEnv("POSTGRES_USER", "siva")
+		.withEnv("POSTGRES_PASSWORD", "secret")
+		.withEnv("POSTGRES_DB", "appdb")
+		.withExposedPorts(5432);
 
 	/*
 	 * @Container static GenericContainer postgres = new GenericContainer<>(new

@@ -30,7 +30,7 @@ public class ProductController {
 		// List<Promotion> promotions = promotionServiceClient.getProductPromotions();
 		List<Promotion> promotions = promotionServiceClient.getProductPromotionsAsync().get();
 		Map<Long, Promotion> promotionsMap = promotions.stream()
-				.collect(Collectors.toMap(Promotion::getProductId, promotion -> promotion));
+			.collect(Collectors.toMap(Promotion::getProductId, promotion -> promotion));
 
 		List<ProductResult> productResults = new ArrayList<>(products.size());
 		for (Product product : products) {

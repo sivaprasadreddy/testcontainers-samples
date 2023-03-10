@@ -26,7 +26,7 @@ class DocumentServiceTest {
 
 	@Container
 	static LocalStackContainer localStack = new LocalStackContainer(DockerImageName.parse("localstack/localstack:1.4"))
-			.withServices(S3);
+		.withServices(S3);
 
 	@DynamicPropertySource
 	static void overrideProperties(DynamicPropertyRegistry registry) {

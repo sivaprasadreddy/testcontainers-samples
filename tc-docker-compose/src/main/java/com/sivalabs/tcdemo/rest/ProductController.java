@@ -20,8 +20,9 @@ public class ProductController {
 
 	@GetMapping("/{code}")
 	public ResponseEntity<Product> getById(@PathVariable String code) {
-		return productService.getByCode(code).map(ResponseEntity::ok)
-				.orElseGet(() -> ResponseEntity.notFound().build());
+		return productService.getByCode(code)
+			.map(ResponseEntity::ok)
+			.orElseGet(() -> ResponseEntity.notFound().build());
 	}
 
 }

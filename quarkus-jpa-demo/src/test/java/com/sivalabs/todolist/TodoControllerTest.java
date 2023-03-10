@@ -21,9 +21,13 @@ class TodoControllerTest {
 
 	@Test
 	void allTodos() {
-		List<Todo> todoList = given().when().get("/api/todos").then().statusCode(200).extract()
-				.as(new TypeRef<List<Todo>>() {
-				});
+		List<Todo> todoList = given().when()
+			.get("/api/todos")
+			.then()
+			.statusCode(200)
+			.extract()
+			.as(new TypeRef<List<Todo>>() {
+			});
 		Assertions.assertNotNull(todoList);
 	}
 
@@ -35,9 +39,13 @@ class TodoControllerTest {
 				"done": false
 				}
 				""";
-		given().contentType(ContentType.JSON).body(body)
+		given().contentType(ContentType.JSON)
+			.body(body)
 
-				.when().post("/api/todos").then().statusCode(201);
+			.when()
+			.post("/api/todos")
+			.then()
+			.statusCode(201);
 	}
 
 }

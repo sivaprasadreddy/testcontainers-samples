@@ -31,8 +31,9 @@ class ProductControllerIT {
 
 	@Container
 	static DockerComposeContainer compose = new DockerComposeContainer(
-			new File("src/test/resources/docker-compose-test.yml")).withExposedService("rabbitmq", 5672)
-					.withExposedService("postgres", 5432);
+			new File("src/test/resources/docker-compose-test.yml"))
+		.withExposedService("rabbitmq", 5672)
+		.withExposedService("postgres", 5432);
 
 	@DynamicPropertySource
 	static void overrideProperties(DynamicPropertyRegistry registry) {

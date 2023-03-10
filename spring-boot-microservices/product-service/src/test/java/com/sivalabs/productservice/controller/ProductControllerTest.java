@@ -45,12 +45,13 @@ class ProductControllerTest {
 
 	@Container
 	static ToxiproxyContainer toxiproxy = new ToxiproxyContainer(TOXIPROXY_IMAGE).withNetwork(network)
-			.withNetworkAliases(TOXIPROXY_NETWORK_ALIAS);
+		.withNetworkAliases(TOXIPROXY_NETWORK_ALIAS);
 
 	@Container
 	static GenericContainer<?> wiremockContainer = new GenericContainer<>(WIREMOCK_IMAGE).withNetwork(network)
-			.withExposedPorts(8080).withClasspathResourceMapping("/wiremock", "/home/wiremock", BindMode.READ_ONLY)
-			.waitingFor(Wait.forHttp("/__admin/mappings").withMethod("GET").forStatusCode(200));
+		.withExposedPorts(8080)
+		.withClasspathResourceMapping("/wiremock", "/home/wiremock", BindMode.READ_ONLY)
+		.waitingFor(Wait.forHttp("/__admin/mappings").withMethod("GET").forStatusCode(200));
 
 	static ToxiproxyContainer.ContainerProxy proxy;
 
@@ -79,8 +80,12 @@ class ProductControllerTest {
 
 	@AfterEach
 	void tearDown() throws IOException {
-		Toxic latency = proxy.toxics().getAll().stream().filter(toxic -> toxic.getName().equals("latency")).findFirst()
-				.orElse(null);
+		Toxic latency = proxy.toxics()
+			.getAll()
+			.stream()
+			.filter(toxic -> toxic.getName().equals("latency"))
+			.findFirst()
+			.orElse(null);
 		if (latency != null) {
 			latency.remove();
 		}
@@ -88,26 +93,28 @@ class ProductControllerTest {
 
 	@Test
 	void shouldReturnAllProductsWithPromotions() throws Exception {
-		mockMvc.perform(get("/api/products")).andExpect(status().isOk())
-				.andExpect(jsonPath("$.size()", Matchers.equalTo(1)))
-				.andExpect(jsonPath("$[0].id", Matchers.equalTo(1)))
-				.andExpect(jsonPath("$[0].name", Matchers.equalTo("Lenovo Laptop")))
-				.andExpect(jsonPath("$[0].originalPrice", Matchers.equalTo(65000.0)))
-				.andExpect(jsonPath("$[0].discount", Matchers.equalTo(3000)))
-				.andExpect(jsonPath("$[0].price", Matchers.equalTo(62000.0)));
+		mockMvc.perform(get("/api/products"))
+			.andExpect(status().isOk())
+			.andExpect(jsonPath("$.size()", Matchers.equalTo(1)))
+			.andExpect(jsonPath("$[0].id", Matchers.equalTo(1)))
+			.andExpect(jsonPath("$[0].name", Matchers.equalTo("Lenovo Laptop")))
+			.andExpect(jsonPath("$[0].originalPrice", Matchers.equalTo(65000.0)))
+			.andExpect(jsonPath("$[0].discount", Matchers.equalTo(3000)))
+			.andExpect(jsonPath("$[0].price", Matchers.equalTo(62000.0)));
 	}
 
 	@Test
 	void shouldReturnAllProductsWithoutPromotions() throws Exception {
 		proxy.toxics().latency("latency", ToxicDirection.DOWNSTREAM, 10_100).setJitter(100);
 
-		mockMvc.perform(get("/api/products")).andExpect(status().isOk())
-				.andExpect(jsonPath("$.size()", Matchers.equalTo(1)))
-				.andExpect(jsonPath("$[0].id", Matchers.equalTo(1)))
-				.andExpect(jsonPath("$[0].name", Matchers.equalTo("Lenovo Laptop")))
-				.andExpect(jsonPath("$[0].originalPrice", Matchers.equalTo(65000.0)))
-				.andExpect(jsonPath("$[0].discount", Matchers.equalTo(0)))
-				.andExpect(jsonPath("$[0].price", Matchers.equalTo(65000.0)));
+		mockMvc.perform(get("/api/products"))
+			.andExpect(status().isOk())
+			.andExpect(jsonPath("$.size()", Matchers.equalTo(1)))
+			.andExpect(jsonPath("$[0].id", Matchers.equalTo(1)))
+			.andExpect(jsonPath("$[0].name", Matchers.equalTo("Lenovo Laptop")))
+			.andExpect(jsonPath("$[0].originalPrice", Matchers.equalTo(65000.0)))
+			.andExpect(jsonPath("$[0].discount", Matchers.equalTo(0)))
+			.andExpect(jsonPath("$[0].price", Matchers.equalTo(65000.0)));
 	}
 
 }

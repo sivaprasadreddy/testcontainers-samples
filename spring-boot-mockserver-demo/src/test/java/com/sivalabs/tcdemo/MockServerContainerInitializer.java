@@ -18,7 +18,7 @@ public class MockServerContainerInitializer implements ApplicationContextInitial
 	@Override
 	public void initialize(ConfigurableApplicationContext configurableApplicationContext) {
 		TestPropertyValues.of("github.api.base-url=" + mockServerContainer.getEndpoint())
-				.applyTo(configurableApplicationContext.getEnvironment());
+			.applyTo(configurableApplicationContext.getEnvironment());
 	}
 
 }

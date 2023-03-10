@@ -55,8 +55,9 @@ class ProductControllerTest {
 
 	@Test
 	void shouldReturnAllProducts() throws Exception {
-		mockMvc.perform(get("/api/products")).andExpect(status().isOk())
-				.andExpect(jsonPath("$.size()", Matchers.equalTo(2)));
+		mockMvc.perform(get("/api/products"))
+			.andExpect(status().isOk())
+			.andExpect(jsonPath("$.size()", Matchers.equalTo(2)));
 	}
 
 	@Test
@@ -67,10 +68,12 @@ class ProductControllerTest {
 				    "description": "test product description",
 				    "price": 24.50
 				}
-				""")).andExpect(status().isCreated()).andExpect(jsonPath("$.id", Matchers.notNullValue()))
-				.andExpect(jsonPath("$.name", Matchers.equalTo("test product")))
-				.andExpect(jsonPath("$.description", Matchers.equalTo("test product description")))
-				.andExpect(jsonPath("$.price", Matchers.equalTo(24.5)));
+				"""))
+			.andExpect(status().isCreated())
+			.andExpect(jsonPath("$.id", Matchers.notNullValue()))
+			.andExpect(jsonPath("$.name", Matchers.equalTo("test product")))
+			.andExpect(jsonPath("$.description", Matchers.equalTo("test product description")))
+			.andExpect(jsonPath("$.price", Matchers.equalTo(24.5)));
 	}
 
 }

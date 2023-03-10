@@ -38,7 +38,7 @@ public class PromotionServiceClient {
 	public List<Promotion> getProductPromotions() {
 		try {
 			List<Promotion> promotions = getTimeLimiter()
-					.executeFutureSupplier(() -> CompletableFuture.supplyAsync(this::getPromotions));
+				.executeFutureSupplier(() -> CompletableFuture.supplyAsync(this::getPromotions));
 			log.info("Promotions count: {} ", promotions.size());
 			return promotions;
 
