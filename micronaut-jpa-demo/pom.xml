@@ -20,8 +20,8 @@
     <packaging>jar</packaging>
     <jdk.version>17</jdk.version>
     <release.version>17</release.version>
-    <micronaut.version>3.6.0</micronaut.version>
-    <micronaut.data.version>3.7.2</micronaut.data.version>
+    <micronaut.version>3.8.7</micronaut.version>
+    <micronaut.data.version>3.9.6</micronaut.data.version>
     <micronaut.test.resources.enabled>true</micronaut.test.resources.enabled>
     <jib.docker.image>${project.artifactId}</jib.docker.image>
     <jib.docker.tag>${project.version}</jib.docker.tag>
