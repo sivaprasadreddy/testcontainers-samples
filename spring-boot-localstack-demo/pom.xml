@@ -15,7 +15,7 @@
     <description>spring-boot-localstack-demo</description>
     <properties>
         <java.version>17</java.version>
-        <awspring.version>3.0.0-RC1</awspring.version>
+        <awspring.version>3.0.0-RC2</awspring.version>
         <testcontainers.version>1.17.6</testcontainers.version>
         <bootstrap.version>5.1.3</bootstrap.version>
         <jquery.version>3.6.3</jquery.version>
@@ -128,7 +128,7 @@
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk-s3</artifactId>
-            <version>1.12.427</version>
+            <version>1.12.439</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
