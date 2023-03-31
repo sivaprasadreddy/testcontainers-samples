@@ -25,6 +25,8 @@
         <module>tc-docker-compose</module>
         <module>spring-boot-jpa-demo</module>
         <module>spring-boot-mongodb-demo</module>
+        <module>spring-boot-kafka-demo</module>
+        <module>spring-boot-rabbitmq-demo</module>
         <module>spring-boot-mockserver-demo</module>
         <module>spring-boot-wiremock-demo</module>
         <module>spring-boot-localstack-demo</module>
