@@ -16,7 +16,7 @@
     <properties>
         <java.version>17</java.version>
         <awspring.version>3.0.0-RC1</awspring.version>
-        <testcontainers.version>1.17.6</testcontainers.version>
+        <testcontainers.version>1.18.0</testcontainers.version>
         <bootstrap.version>5.1.3</bootstrap.version>
         <jquery.version>3.6.3</jquery.version>
     </properties>
