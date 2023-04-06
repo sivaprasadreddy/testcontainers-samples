@@ -1,9 +1,7 @@
-name: Build quarkus-jpa-demo
+name: Build
 
 on:
   push:
-    paths:
-      - quarkus-jpa-demo/**
     branches:
       - '**'
 
@@ -11,9 +9,6 @@ jobs:
   test:
     name: Run Tests
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./quarkus-jpa-demo
     steps:
       - uses: actions/checkout@v3
 
