@@ -25,7 +25,7 @@ import static org.testcontainers.containers.localstack.LocalStackContainer.Servi
 class DocumentServiceTest {
 
 	@Container
-	static LocalStackContainer localStack = new LocalStackContainer(DockerImageName.parse("localstack/localstack:1.4"))
+	static LocalStackContainer localStack = new LocalStackContainer(DockerImageName.parse("localstack/localstack:2.0"))
 		.withServices(S3);
 
 	@DynamicPropertySource

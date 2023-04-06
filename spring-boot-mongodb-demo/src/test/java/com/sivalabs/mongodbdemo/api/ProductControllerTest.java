@@ -6,6 +6,7 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.mongo.MongoServiceConnection;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -32,12 +33,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class ProductControllerTest {
 
 	@Container
-	static MongoDBContainer mongo = new MongoDBContainer(DockerImageName.parse("mongo:4.0.10"));
+	@MongoServiceConnection
+	static MongoDBContainer mongo = new MongoDBContainer(DockerImageName.parse("mongo:6.0.5"));
 
-	@DynamicPropertySource
-	static void configureProperties(DynamicPropertyRegistry registry) {
-		registry.add("spring.data.mongodb.uri", mongo::getReplicaSetUrl);
-	}
+	/*
+	 * @DynamicPropertySource static void configureProperties(DynamicPropertyRegistry
+	 * registry) { registry.add("spring.data.mongodb.uri", mongo::getReplicaSetUrl); }
+	 */
 
 	@Autowired
 	private MockMvc mockMvc;
