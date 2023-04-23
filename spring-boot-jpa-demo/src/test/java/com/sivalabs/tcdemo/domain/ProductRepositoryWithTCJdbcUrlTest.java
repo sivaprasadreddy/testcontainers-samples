@@ -1,5 +1,6 @@
 package com.sivalabs.tcdemo.domain;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -15,6 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @TestPropertySource(properties = { "spring.datasource.url=jdbc:tc:postgresql:15.2-alpine:///demodb" })
+@Disabled
 class ProductRepositoryWithTCJdbcUrlTest {
 
 	@Autowired

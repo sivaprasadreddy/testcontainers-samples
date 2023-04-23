@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.0-M2</version>
+        <version>3.1.0-RC1</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.sivalabs</groupId>
@@ -16,7 +16,6 @@
     <properties>
         <java.version>17</java.version>
         <awspring.version>3.0.0-RC2</awspring.version>
-        <testcontainers.version>1.18.0</testcontainers.version>
         <bootstrap.version>5.1.3</bootstrap.version>
         <jquery.version>3.6.3</jquery.version>
     </properties>
@@ -26,13 +25,6 @@
                 <groupId>io.awspring.cloud</groupId>
                 <artifactId>spring-cloud-aws-dependencies</artifactId>
                 <version>${awspring.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.testcontainers</groupId>
-                <artifactId>testcontainers-bom</artifactId>
-                <version>${testcontainers.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
