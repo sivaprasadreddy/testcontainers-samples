@@ -10,12 +10,11 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class ProductEventListener {
 
-	private final ProductService productService;
+    private final ProductService productService;
 
-	@RabbitListener(queues = "products")
-	public void handle(CreateProductRequest request) {
-		Product product = new Product(null, request.getCode(), request.getName(), request.getPrice());
-		productService.save(product);
-	}
-
+    @RabbitListener(queues = "products")
+    public void handle(CreateProductRequest request) {
+        Product product = new Product(null, request.getCode(), request.getName(), request.getPrice());
+        productService.save(product);
+    }
 }

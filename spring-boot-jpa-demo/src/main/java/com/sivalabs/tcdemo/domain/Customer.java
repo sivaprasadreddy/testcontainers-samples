@@ -1,9 +1,8 @@
 package com.sivalabs.tcdemo.domain;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import jakarta.persistence.*;
 
 @Entity
 @Table(name = "customers")
@@ -11,15 +10,14 @@ import jakarta.persistence.*;
 @Getter
 public class Customer {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_id_generator")
-	@SequenceGenerator(name = "customer_id_generator", sequenceName = "customer_id_seq")
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_id_generator")
+    @SequenceGenerator(name = "customer_id_generator", sequenceName = "customer_id_seq")
+    private Long id;
 
-	@Column(nullable = false, unique = true)
-	private String email;
+    @Column(nullable = false, unique = true)
+    private String email;
 
-	@Column(nullable = false)
-	private String name;
-
+    @Column(nullable = false)
+    private String name;
 }

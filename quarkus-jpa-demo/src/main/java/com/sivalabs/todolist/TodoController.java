@@ -12,16 +12,15 @@ import java.util.List;
 @Path("/api/todos")
 public class TodoController {
 
-	@GET
-	public List<Todo> allTodos() {
-		return Todo.listAll();
-	}
+    @GET
+    public List<Todo> allTodos() {
+        return Todo.listAll();
+    }
 
-	@POST
-	@Transactional
-	public Response createTodo(@Valid Todo todo) {
-		Todo.persist(todo);
-		return Response.created(URI.create("/api/todos/" + todo.id)).build();
-	}
-
+    @POST
+    @Transactional
+    public Response createTodo(@Valid Todo todo) {
+        Todo.persist(todo);
+        return Response.created(URI.create("/api/todos/" + todo.id)).build();
+    }
 }

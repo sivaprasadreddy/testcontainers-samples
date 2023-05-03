@@ -14,32 +14,31 @@ import lombok.Setter;
 @Builder
 public class GitHubUser {
 
-	private Long id;
+    private Long id;
 
-	private String login;
+    private String login;
 
-	private String name;
+    private String name;
 
-	private String company;
+    private String company;
 
-	private String blog;
+    private String blog;
 
-	private String location;
+    private String location;
 
-	private String email;
+    private String email;
 
-	private String bio;
+    private String bio;
 
-	@JsonProperty("twitter_username")
-	private String twitterUsername;
+    @JsonProperty("twitter_username")
+    private String twitterUsername;
 
-	@JsonProperty("public_repos")
-	private int publicRepos;
+    @JsonProperty("public_repos")
+    private int publicRepos;
 
-	private int followers;
+    private int followers;
 
-	private int following;
+    private int following;
 
-	private boolean hireable;
-
+    private boolean hireable;
 }

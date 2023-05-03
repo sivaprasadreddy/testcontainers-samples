@@ -13,27 +13,25 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class PromotionController {
 
-	private final PromotionRepository promotionRepository;
+    private final PromotionRepository promotionRepository;
 
-	@GetMapping("/api/promotions")
-	public List<Promotion> getPromotions() {
-		// randomWait();
-		return promotionRepository.findAll();
-	}
+    @GetMapping("/api/promotions")
+    public List<Promotion> getPromotions() {
+        // randomWait();
+        return promotionRepository.findAll();
+    }
 
-	private void randomWait() {
-		int waitSeconds = getRandomNumber(0, 3);
-		log.info("Sleeping for {} seconds", waitSeconds);
-		try {
-			Thread.sleep(waitSeconds * 1000L);
-		}
-		catch (InterruptedException e) {
-			throw new RuntimeException(e);
-		}
-	}
+    private void randomWait() {
+        int waitSeconds = getRandomNumber(0, 3);
+        log.info("Sleeping for {} seconds", waitSeconds);
+        try {
+            Thread.sleep(waitSeconds * 1000L);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-	private int getRandomNumber(int min, int max) {
-		return (int) ((Math.random() * (max - min)) + min);
-	}
-
+    private int getRandomNumber(int min, int max) {
+        return (int) ((Math.random() * (max - min)) + min);
+    }
 }

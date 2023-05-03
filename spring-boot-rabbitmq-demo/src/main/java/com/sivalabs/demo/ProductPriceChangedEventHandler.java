@@ -10,12 +10,14 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class ProductPriceChangedEventHandler {
 
-	private final ProductService productService;
+    private final ProductService productService;
 
-	@RabbitListener(queues = "product-price-changes")
-	public void handle(ProductPriceChangedEvent event) {
-		log.info("Received a ProductPriceChangedEvent with productCode:{}: ", event.getProductCode());
-		productService.updateProductPrice(event.getProductCode(), event.getPrice());
-	}
-
+    @RabbitListener(queues = "product-price-changes")
+    public void handle(ProductPriceChangedEvent event) {
+        log.info(
+                "Received a ProductPriceChangedEvent with productCode:{} at: {}",
+                event.getProductCode(),
+                event.getEventDate());
+        productService.updateProductPrice(event.getProductCode(), event.getPrice());
+    }
 }

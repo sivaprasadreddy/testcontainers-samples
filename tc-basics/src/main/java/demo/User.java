@@ -2,28 +2,27 @@ package demo;
 
 public class User {
 
-	private Long id;
+    private Long id;
 
-	private String name;
+    private String name;
 
-	private String email;
+    private String email;
 
-	public User(Long id, String name, String email) {
-		this.id = id;
-		this.name = name;
-		this.email = email;
-	}
+    public User(Long id, String name, String email) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getEmail() {
-		return email;
-	}
-
+    public String getEmail() {
+        return email;
+    }
 }

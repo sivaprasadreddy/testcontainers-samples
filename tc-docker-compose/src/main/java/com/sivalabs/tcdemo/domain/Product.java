@@ -1,12 +1,11 @@
 package com.sivalabs.tcdemo.domain;
 
+import jakarta.persistence.*;
+import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import jakarta.persistence.*;
-import java.math.BigDecimal;
 
 @Entity
 @Table(name = "products")
@@ -16,17 +15,16 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class Product {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_id_generator")
-	@SequenceGenerator(name = "product_id_generator", sequenceName = "product_id_seq")
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_id_generator")
+    @SequenceGenerator(name = "product_id_generator", sequenceName = "product_id_seq")
+    private Long id;
 
-	@Column(nullable = false, unique = true)
-	private String code;
+    @Column(nullable = false, unique = true)
+    private String code;
 
-	private String name;
+    private String name;
 
-	@Column(nullable = false)
-	private BigDecimal price;
-
+    @Column(nullable = false)
+    private BigDecimal price;
 }

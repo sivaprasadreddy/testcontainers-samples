@@ -9,24 +9,21 @@ import io.micronaut.scheduling.TaskExecutors;
 import io.micronaut.scheduling.annotation.ExecuteOn;
 import lombok.RequiredArgsConstructor;
 
-import java.util.List;
-
 @ExecuteOn(TaskExecutors.IO)
 @Controller("/todos")
 @RequiredArgsConstructor
 public class TodoController {
 
-	private final TodoRepository repo;
+    private final TodoRepository repo;
 
-	@Get
-	Iterable<Todo> list() {
-		return repo.findAll();
-	}
+    @Get
+    Iterable<Todo> list() {
+        return repo.findAll();
+    }
 
-	@Post
-	HttpResponse<Todo> save(@Body Todo todo) {
-		Todo savedTodo = repo.save(todo);
-		return HttpResponse.created(savedTodo);
-	}
-
+    @Post
+    HttpResponse<Todo> save(@Body Todo todo) {
+        Todo savedTodo = repo.save(todo);
+        return HttpResponse.created(savedTodo);
+    }
 }

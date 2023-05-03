@@ -8,17 +8,16 @@ import org.testcontainers.utility.DockerImageName;
 
 public class MockServerContainerInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
-	public static MockServerContainer mockServerContainer = new MockServerContainer(
-			DockerImageName.parse("mockserver/mockserver:5.15.0"));
+    public static MockServerContainer mockServerContainer =
+            new MockServerContainer(DockerImageName.parse("mockserver/mockserver:5.15.0"));
 
-	static {
-		mockServerContainer.start();
-	}
+    static {
+        mockServerContainer.start();
+    }
 
-	@Override
-	public void initialize(ConfigurableApplicationContext configurableApplicationContext) {
-		TestPropertyValues.of("github.api.base-url=" + mockServerContainer.getEndpoint())
-			.applyTo(configurableApplicationContext.getEnvironment());
-	}
-
+    @Override
+    public void initialize(ConfigurableApplicationContext configurableApplicationContext) {
+        TestPropertyValues.of("github.api.base-url=" + mockServerContainer.getEndpoint())
+                .applyTo(configurableApplicationContext.getEnvironment());
+    }
 }

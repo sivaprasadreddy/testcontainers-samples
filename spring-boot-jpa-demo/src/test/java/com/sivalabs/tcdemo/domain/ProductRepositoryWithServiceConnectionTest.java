@@ -1,6 +1,10 @@
 package com.sivalabs.tcdemo.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import jakarta.persistence.EntityManager;
+import java.math.BigDecimal;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -11,36 +15,30 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
-import java.math.BigDecimal;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Testcontainers
 class ProductRepositoryWithServiceConnectionTest {
 
-	@Container
-	@ServiceConnection
-	static PostgreSQLContainer<?> postgresqlContainer = new PostgreSQLContainer<>(
-			DockerImageName.parse("postgres:15.2-alpine"));
+    @Container
+    @ServiceConnection
+    static PostgreSQLContainer<?> postgresqlContainer =
+            new PostgreSQLContainer<>(DockerImageName.parse("postgres:15.2-alpine"));
 
-	@Autowired
-	private ProductRepository productRepository;
+    @Autowired
+    private ProductRepository productRepository;
 
-	@Autowired
-	private EntityManager entityManager;
+    @Autowired
+    private EntityManager entityManager;
 
-	@Test
-	void shouldGetAllActiveProducts() {
-		entityManager.persist(new Product(null, "pname1", "pdescr1", BigDecimal.TEN, false));
-		entityManager.persist(new Product(null, "pname2", "pdescr2", BigDecimal.TEN, true));
+    @Test
+    void shouldGetAllActiveProducts() {
+        entityManager.persist(new Product(null, "pname1", "pdescr1", BigDecimal.TEN, false));
+        entityManager.persist(new Product(null, "pname2", "pdescr2", BigDecimal.TEN, true));
 
-		List<Product> products = productRepository.findAllActiveProducts();
+        List<Product> products = productRepository.findAllActiveProducts();
 
-		assertThat(products).hasSize(1);
-		assertThat(products.get(0).getName()).isEqualTo("pname1");
-	}
-
+        assertThat(products).hasSize(1);
+        assertThat(products.get(0).getName()).isEqualTo("pname1");
+    }
 }

@@ -1,9 +1,6 @@
 package com.sivalabs.myapp;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import static javax.persistence.GenerationType.AUTO;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,8 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-
-import static javax.persistence.GenerationType.AUTO;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "todos")
@@ -22,14 +21,12 @@ import static javax.persistence.GenerationType.AUTO;
 @AllArgsConstructor
 public class Todo {
 
-	@Id
-	@GeneratedValue(strategy = AUTO)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = AUTO)
+    private Long id;
 
-	@NotNull
-	@Column(name = "content", nullable = false)
-	private String content;
+    @NotNull @Column(name = "content", nullable = false)
+    private String content;
 
-	private boolean done;
-
+    private boolean done;
 }

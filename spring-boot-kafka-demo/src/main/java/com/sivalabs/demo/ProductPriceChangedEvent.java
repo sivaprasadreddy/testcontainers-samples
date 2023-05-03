@@ -1,11 +1,11 @@
 package com.sivalabs.demo;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.math.BigDecimal;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,8 +13,9 @@ import java.math.BigDecimal;
 @Getter
 public class ProductPriceChangedEvent {
 
-	private String productCode;
+    private String productCode;
 
-	private BigDecimal price;
+    private BigDecimal price;
 
+    private LocalDateTime eventDate;
 }

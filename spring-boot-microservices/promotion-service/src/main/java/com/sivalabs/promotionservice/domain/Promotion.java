@@ -1,14 +1,13 @@
 package com.sivalabs.promotionservice.domain;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 
 @Entity
 @Setter
@@ -17,12 +16,11 @@ import jakarta.persistence.Id;
 @AllArgsConstructor
 public class Promotion {
 
-	@Id
-	private Long id;
+    @Id
+    private Long id;
 
-	@Column(unique = true)
-	private Long productId;
+    @Column(unique = true)
+    private Long productId;
 
-	private BigDecimal discount;
-
+    private BigDecimal discount;
 }
