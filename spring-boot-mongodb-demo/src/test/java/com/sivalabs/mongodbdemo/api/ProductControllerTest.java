@@ -32,11 +32,6 @@ class ProductControllerTest {
     @ServiceConnection
     static MongoDBContainer mongo = new MongoDBContainer(DockerImageName.parse("mongo:6.0.5"));
 
-    /*
-     * @DynamicPropertySource static void configureProperties(DynamicPropertyRegistry
-     * registry) { registry.add("spring.data.mongodb.uri", mongo::getReplicaSetUrl); }
-     */
-
     @Autowired
     private MockMvc mockMvc;
 
