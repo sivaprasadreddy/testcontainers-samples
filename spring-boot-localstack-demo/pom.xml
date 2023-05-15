@@ -15,7 +15,7 @@
     <description>spring-boot-localstack-demo</description>
     <properties>
         <java.version>17</java.version>
-        <awspring.version>3.0.0</awspring.version>
+        <awspring.version>3.0.1</awspring.version>
         <testcontainers.version>1.18.1</testcontainers.version>
     </properties>
     <dependencyManagement>
