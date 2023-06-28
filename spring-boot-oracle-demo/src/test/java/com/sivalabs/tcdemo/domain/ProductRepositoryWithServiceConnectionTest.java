@@ -9,12 +9,20 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.TestPropertySource;
+import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
+import org.testcontainers.containers.OracleContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.utility.DockerImageName;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@TestPropertySource(properties = {"spring.datasource.url=jdbc:tc:postgresql:15.2-alpine:///demodb"})
-class ProductRepositoryWithTCJdbcUrlTest {
+@Testcontainers
+class ProductRepositoryWithServiceConnectionTest {
+
+    @Container
+    @ServiceConnection
+    static OracleContainer oracle = new OracleContainer(DockerImageName.parse("gvenzl/oracle-xe:21-slim-faststart"));
 
     @Autowired
     private ProductRepository productRepository;
