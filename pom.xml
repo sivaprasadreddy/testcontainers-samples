@@ -24,7 +24,8 @@
         <module>tc-dockerfile</module>
         <module>tc-docker-compose</module>
         <module>spring-boot-jpa-demo</module>
-        <module>spring-boot-oracle-demo</module>
+        <module>spring-boot-couchbase-demo</module>
+        <!--<module>spring-boot-oracle-demo</module>-->
         <module>spring-boot-mongodb-demo</module>
         <module>spring-boot-kafka-demo</module>
         <module>spring-boot-rabbitmq-demo</module>
