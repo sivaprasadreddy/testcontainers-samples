@@ -15,7 +15,7 @@
         <java.version>17</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <testcontainers.version>1.18.3</testcontainers.version>
+        <testcontainers.version>1.19.0</testcontainers.version>
     </properties>
 
     <dependencies>
@@ -32,7 +32,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.9.3</version>
+            <version>5.10.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
