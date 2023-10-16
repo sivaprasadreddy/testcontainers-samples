@@ -23,7 +23,7 @@ class ProductRepositoryWithServiceConnectionTest {
     @Container
     @ServiceConnection
     static PostgreSQLContainer<?> postgresqlContainer =
-            new PostgreSQLContainer<>(DockerImageName.parse("postgres:15.2-alpine"));
+            new PostgreSQLContainer<>(DockerImageName.parse("postgres:16-alpine"));
 
     @Autowired
     private ProductRepository productRepository;

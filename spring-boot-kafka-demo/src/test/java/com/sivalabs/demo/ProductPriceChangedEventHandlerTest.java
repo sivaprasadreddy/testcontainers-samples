@@ -34,13 +34,13 @@ class ProductPriceChangedEventHandlerTest {
 
     @Container
     @ServiceConnection
-    static final PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:15.2-alpine")
+    static final PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine")
             .withCopyFileToContainer(
                     MountableFile.forClasspathResource("sql/schema.sql"), "/docker-entrypoint-initdb.d/schema.sql");
 
     @Container
     @ServiceConnection
-    static final KafkaContainer kafka = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.2.1"));
+    static final KafkaContainer kafka = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.5.0"));
 
     /*
      * @DynamicPropertySource static void

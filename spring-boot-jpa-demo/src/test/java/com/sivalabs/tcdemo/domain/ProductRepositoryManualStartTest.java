@@ -22,7 +22,7 @@ import org.testcontainers.utility.DockerImageName;
 class ProductRepositoryManualStartTest {
 
     static PostgreSQLContainer<?> postgresqlContainer =
-            new PostgreSQLContainer<>(DockerImageName.parse("postgres:15.2-alpine"));
+            new PostgreSQLContainer<>(DockerImageName.parse("postgres:16-alpine"));
 
     @BeforeAll
     static void beforeAll() {

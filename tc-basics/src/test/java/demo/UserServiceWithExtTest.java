@@ -18,7 +18,7 @@ class UserServiceWithExtTest {
     UserService userService;
 
     @Container
-    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:15.2-alpine");
+    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine");
 
     @BeforeAll
     static void beforeAll() throws SQLException {

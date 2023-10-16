@@ -30,7 +30,7 @@ public class ProductServiceTest {
     /*
      * @Container static GenericContainer postgres = new GenericContainer<>(new
      * ImageFromDockerfile() .withDockerfileFromBuilder(builder -> builder
-     * .from("postgres:15.2-alpine") .build())) .withClasspathResourceMapping("sql/",
+     * .from("postgres:16-alpine") .build())) .withClasspathResourceMapping("sql/",
      * "/docker-entrypoint-initdb.d/", BindMode.READ_ONLY)
      * .withEnv("POSTGRES_USER","siva") .withEnv("POSTGRES_PASSWORD","secret")
      * .withEnv("POSTGRES_DB","appdb") .withExposedPorts(5432) ;
