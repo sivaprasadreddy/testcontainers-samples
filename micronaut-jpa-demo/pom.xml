@@ -21,7 +21,7 @@
     <jdk.version>17</jdk.version>
     <release.version>17</release.version>
     <micronaut.version>4.1.10</micronaut.version>
-    <micronaut.data.version>4.1.4</micronaut.data.version>
+    <micronaut.data.version>4.3.1</micronaut.data.version>
     <micronaut.test.resources.enabled>true</micronaut.test.resources.enabled>
     <micronaut.runtime>netty</micronaut.runtime>
     <exec.mainClass>com.sivalabs.myapp.Application</exec.mainClass>
