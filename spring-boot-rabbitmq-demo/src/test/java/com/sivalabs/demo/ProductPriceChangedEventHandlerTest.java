@@ -27,7 +27,7 @@ import org.testcontainers.utility.DockerImageName;
 @ActiveProfiles("it")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource(
-        properties = {"spring.datasource.url=jdbc:tc:postgresql:15.2-alpine:///db?TC_INITSCRIPT=sql/schema.sql"})
+        properties = {"spring.datasource.url=jdbc:tc:postgresql:16-alpine:///db?TC_INITSCRIPT=sql/schema.sql"})
 @Testcontainers
 @Slf4j
 class ProductPriceChangedEventHandlerTest {

@@ -13,7 +13,7 @@ import org.springframework.test.context.TestPropertySource;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@TestPropertySource(properties = {"spring.datasource.url=jdbc:tc:postgresql:15.2-alpine:///demodb"})
+@TestPropertySource(properties = {"spring.datasource.url=jdbc:tc:postgresql:16-alpine:///demodb"})
 class ProductRepositoryWithTCJdbcUrlTest {
 
     @Autowired

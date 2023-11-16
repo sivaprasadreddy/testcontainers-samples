@@ -16,7 +16,7 @@ import org.testcontainers.utility.DockerImageName;
 @SpringBootTest
 abstract class AbstractIntegrationTest {
 
-    static LocalStackContainer localStack = new LocalStackContainer(DockerImageName.parse("localstack/localstack:2.3"));
+    static LocalStackContainer localStack = new LocalStackContainer(DockerImageName.parse("localstack/localstack:3.0.0"));
 
     static final String BUCKET_NAME = UUID.randomUUID().toString();
     static final String QUEUE_NAME = UUID.randomUUID().toString();
