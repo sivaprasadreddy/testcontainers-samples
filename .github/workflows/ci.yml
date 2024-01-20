@@ -20,4 +20,4 @@ jobs:
           cache: 'maven'
 
       - name: Test
-        run: ./mvnw verify
+        run: ./mvnw -ntp verify
