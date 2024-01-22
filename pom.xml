@@ -36,6 +36,7 @@
         <module>spring-boot-wiremock-demo</module>
         <module>spring-boot-localstack-demo</module>
         <module>spring-boot-microservices</module>
+        <module>spring-boot-kotlin-demo</module>
         <module>quarkus-jpa-demo</module>
         <module>micronaut-jpa-demo</module>
     </modules>
