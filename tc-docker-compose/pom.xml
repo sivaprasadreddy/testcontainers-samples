@@ -16,7 +16,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>17</java.version>
-        <testcontainers.version>1.19.3</testcontainers.version>
+        <testcontainers.version>1.19.6</testcontainers.version>
     </properties>
     <dependencies>
         <dependency>

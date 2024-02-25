@@ -18,7 +18,7 @@
     <properties>
         <java.version>17</java.version>
         <resilience4jVersion>2.2.0</resilience4jVersion>
-        <testcontainers.version>1.19.3</testcontainers.version>
+        <testcontainers.version>1.19.6</testcontainers.version>
     </properties>
 
     <dependencies>

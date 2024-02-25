@@ -12,7 +12,7 @@
   <parent>
     <groupId>io.micronaut.platform</groupId>
     <artifactId>micronaut-parent</artifactId>
-    <version>4.2.3</version>
+    <version>4.2.4</version>
     <relativePath/>
   </parent>
 
@@ -20,7 +20,7 @@
     <packaging>jar</packaging>
     <jdk.version>17</jdk.version>
     <release.version>17</release.version>
-    <micronaut.version>4.2.3</micronaut.version>
+    <micronaut.version>4.2.4</micronaut.version>
     <micronaut.aot.enabled>false</micronaut.aot.enabled>
     <micronaut.aot.packageName>com.sivalabs.myapp.aot.generated</micronaut.aot.packageName>
     <micronaut.test.resources.enabled>true</micronaut.test.resources.enabled>
