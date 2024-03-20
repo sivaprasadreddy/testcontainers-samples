@@ -14,8 +14,8 @@
 	<name>spring-boot-kotlin-demo</name>
 	<properties>
 		<java.version>17</java.version>
-		<kotlin.version>1.9.22</kotlin.version>
-		<testcontainers.version>1.19.6</testcontainers.version>
+		<kotlin.version>1.9.23</kotlin.version>
+		<testcontainers.version>1.19.7</testcontainers.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -119,7 +119,7 @@
 			<plugin>
 				<groupId>com.diffplug.spotless</groupId>
 				<artifactId>spotless-maven-plugin</artifactId>
-				<version>2.42.0</version>
+				<version>2.43.0</version>
 				<configuration>
 					<kotlin>
 						<ktlint />
