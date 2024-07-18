@@ -15,7 +15,7 @@
     <description>spring-boot-oracle-demo</description>
     <properties>
         <java.version>21</java.version>
-        <testcontainers.version>1.19.8</testcontainers.version>
+        <testcontainers.version>1.20.0</testcontainers.version>
     </properties>
     <dependencies>
         <dependency>
