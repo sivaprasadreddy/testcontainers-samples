@@ -40,7 +40,7 @@ class ProductControllerTest {
 
     private static final DockerImageName TOXIPROXY_IMAGE = DockerImageName.parse("shopify/toxiproxy");
 
-    private static final DockerImageName WIREMOCK_IMAGE = DockerImageName.parse("wiremock/wiremock:2.33.2");
+    private static final DockerImageName WIREMOCK_IMAGE = DockerImageName.parse("wiremock/wiremock:2.35.0");
 
     @Container
     static ToxiproxyContainer toxiproxy =

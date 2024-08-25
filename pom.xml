@@ -6,11 +6,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.sivalabs</groupId>
-    <artifactId>testcontainers-java-samples</artifactId>
+    <artifactId>testcontainers-samples</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>testcontainers-java-samples</name>
-    <description>testcontainers-java-samples</description>
+    <name>testcontainers-samples</name>
+    <description>testcontainers-samples</description>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>21</java.version>
