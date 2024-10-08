@@ -24,7 +24,7 @@ class ProductRepositoryTest {
 
     @Container
     static PostgreSQLContainer<?> postgresqlContainer =
-            new PostgreSQLContainer<>(DockerImageName.parse("postgres:16-alpine"));
+            new PostgreSQLContainer<>(DockerImageName.parse("postgres:17-alpine"));
 
     @DynamicPropertySource
     static void overrideProperties(DynamicPropertyRegistry registry) {

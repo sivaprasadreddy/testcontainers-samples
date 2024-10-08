@@ -17,7 +17,7 @@ import org.testcontainers.utility.DockerImageName;
 abstract class AbstractIntegrationTest {
 
     static LocalStackContainer localStack =
-            new LocalStackContainer(DockerImageName.parse("localstack/localstack:3.7.2"));
+            new LocalStackContainer(DockerImageName.parse("localstack/localstack:3.8.0"));
 
     static final String BUCKET_NAME = UUID.randomUUID().toString();
     static final String QUEUE_NAME = UUID.randomUUID().toString();

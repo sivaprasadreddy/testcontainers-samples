@@ -6,7 +6,7 @@ import org.testcontainers.containers.PostgreSQLContainer;
 
 public class PostgresResource implements QuarkusTestResourceLifecycleManager {
 
-    static PostgreSQLContainer<?> db = new PostgreSQLContainer<>("postgres:16-alpine");
+    static PostgreSQLContainer<?> db = new PostgreSQLContainer<>("postgres:17-alpine");
 
     @Override
     public Map<String, String> start() {

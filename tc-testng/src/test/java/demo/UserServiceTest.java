@@ -16,7 +16,7 @@ public class UserServiceTest {
 
     UserService userService;
 
-    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine");
+    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:17-alpine");
 
     @BeforeClass
     public static void beforeClass() throws SQLException {

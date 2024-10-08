@@ -26,7 +26,7 @@ import org.testcontainers.utility.MountableFile;
 @ActiveProfiles("it")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 // @TestPropertySource(properties = {
-// "spring.datasource.url=jdbc:tc:postgresql:16-alpine:///db?TC_INITSCRIPT=sql/schema.sql"
+// "spring.datasource.url=jdbc:tc:postgresql:17-alpine:///db?TC_INITSCRIPT=sql/schema.sql"
 // })
 @Testcontainers
 @Slf4j
@@ -34,7 +34,7 @@ class ProductPriceChangedEventHandlerTest {
 
     @Container
     @ServiceConnection
-    static final PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:16-alpine")
+    static final PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:17-alpine")
             .withCopyFileToContainer(
                     MountableFile.forClasspathResource("sql/schema.sql"), "/docker-entrypoint-initdb.d/schema.sql");
 
