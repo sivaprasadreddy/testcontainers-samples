@@ -14,7 +14,7 @@
 	<name>spring-boot-kotlin-demo</name>
 	<properties>
 		<java.version>21</java.version>
-		<kotlin.version>2.1.0</kotlin.version>
+		<kotlin.version>2.2.10</kotlin.version>
 		<testcontainers.version>1.20.4</testcontainers.version>
 	</properties>
 	<dependencies>
