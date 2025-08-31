@@ -17,8 +17,8 @@
     <description>product-service</description>
     <properties>
         <java.version>21</java.version>
-        <resilience4jVersion>2.2.0</resilience4jVersion>
-        <testcontainers.version>1.20.4</testcontainers.version>
+        <resilience4jVersion>2.3.0</resilience4jVersion>
+        <testcontainers.version>1.21.3</testcontainers.version>
     </properties>
 
     <dependencies>
@@ -62,7 +62,7 @@
         <dependency>
             <groupId>org.wiremock</groupId>
             <artifactId>wiremock-standalone</artifactId>
-            <version>3.10.0</version>
+            <version>3.13.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>

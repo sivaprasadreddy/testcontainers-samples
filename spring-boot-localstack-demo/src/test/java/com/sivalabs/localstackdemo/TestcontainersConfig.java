@@ -17,7 +17,7 @@ public class TestcontainersConfig {
     @Bean
     @ServiceConnection
     LocalStackContainer localstackContainer() {
-        LocalStackContainer localStack = new LocalStackContainer(DockerImageName.parse("localstack/localstack:4.0.3"));
+        LocalStackContainer localStack = new LocalStackContainer(DockerImageName.parse("localstack/localstack:4.7.0"));
         try {
             localStack.start();
             localStack.execInContainer("awslocal", "s3", "mb", "s3://" + BUCKET_NAME);
