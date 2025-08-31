@@ -4,9 +4,11 @@ import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.stereotype.Repository
 
 @Repository
-class ProductRepository(private val jdbcTemplate: JdbcTemplate) {
-    fun getAll(): List<Product> {
-        return jdbcTemplate.query(
+class ProductRepository(
+    private val jdbcTemplate: JdbcTemplate,
+) {
+    fun getAll(): List<Product> =
+        jdbcTemplate.query(
             "select * from products",
         ) { rs, _ ->
             Product(
@@ -16,5 +18,4 @@ class ProductRepository(private val jdbcTemplate: JdbcTemplate) {
                 rs.getBigDecimal("price"),
             )
         }
-    }
 }

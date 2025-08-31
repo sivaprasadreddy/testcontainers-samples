@@ -8,8 +8,7 @@ import java.util.List;
 @Entity
 public class Todo extends PanacheEntity {
 
-    @NotBlank(message = "content may not be blank")
-    public String content;
+    @NotBlank(message = "content may not be blank") public String content;
 
     public boolean done;
 

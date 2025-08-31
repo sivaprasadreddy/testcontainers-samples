@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.0</version>
+		<version>3.5.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.sivalabs</groupId>
@@ -14,7 +14,7 @@
 	<name>spring-boot-kotlin-demo</name>
 	<properties>
 		<java.version>21</java.version>
-		<kotlin.version>2.1.0</kotlin.version>
+		<kotlin.version>2.2.10</kotlin.version>
 		<testcontainers.version>1.20.4</testcontainers.version>
 	</properties>
 	<dependencies>
@@ -123,7 +123,7 @@
 			<plugin>
 				<groupId>com.diffplug.spotless</groupId>
 				<artifactId>spotless-maven-plugin</artifactId>
-				<version>2.43.0</version>
+				<version>2.46.1</version>
 				<configuration>
 					<kotlin>
 						<ktlint />

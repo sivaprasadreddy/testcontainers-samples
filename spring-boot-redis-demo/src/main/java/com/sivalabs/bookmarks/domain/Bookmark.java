@@ -16,11 +16,9 @@ public class Bookmark {
     @Id
     private String id;
 
-    @NotEmpty(message = "Title is mandatory")
-    private String title;
+    @NotEmpty(message = "Title is mandatory") private String title;
 
-    @NotEmpty(message = "Url is mandatory")
-    private String url;
+    @NotEmpty(message = "Url is mandatory") private String url;
 
     private Instant createdAt;
 }

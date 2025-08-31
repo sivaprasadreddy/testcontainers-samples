@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/products")
-class ProductController(private val repository: ProductRepository) {
+class ProductController(
+    private val repository: ProductRepository,
+) {
     @GetMapping
     fun getAll() = repository.getAll()
 }
