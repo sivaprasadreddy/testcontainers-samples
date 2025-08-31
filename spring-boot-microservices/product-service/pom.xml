@@ -17,7 +17,7 @@
     <description>product-service</description>
     <properties>
         <java.version>21</java.version>
-        <resilience4jVersion>2.2.0</resilience4jVersion>
+        <resilience4jVersion>2.3.0</resilience4jVersion>
         <testcontainers.version>1.20.4</testcontainers.version>
     </properties>
 
